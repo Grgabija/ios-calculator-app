@@ -63,31 +63,41 @@ class Calculations {
             operation = sender.tag
             performingMath = true;
             
+        } else if sender.tag == 16 {
+            mathematicalOperations(sender, label)
         }
         
-        
-        else if sender.tag == 16 {
+        else if sender.tag == 11 {
+            label.text = ""
+            previousNumber = 0;
+            numberOnScreen = 0;
+            operation = 0;
+        }
 
-            if operation == 12{ //Divide
+    }
+    
+    func mathematicalOperations(_ sender: UIButton, _ label: UILabel) {
+
+            if operation == 12 { //Divide
                 guard numberOnScreen != 0 else {
                     return label.text = "ERR0R"
                 }
                 label.text = String(previousNumber / numberOnScreen)
             }
             
-            else if operation == 13{ //Multiply
+            else if operation == 13 { //Multiply
                 label.text = String(previousNumber * numberOnScreen)
             }
             
-            else if operation == 14{ //Subtract
+            else if operation == 14 { //Subtract
                 label.text = String(previousNumber - numberOnScreen)
             }
             
-            else if operation == 15{ //Add
+            else if operation == 15 { //Add
                 label.text = String(previousNumber + numberOnScreen)
             }
             
-            else if operation == 17{ //Remainder
+            else if operation == 17 { //Remainder
                 guard numberOnScreen != 0 else {
                     return label.text = "ERR0R"
                 }
@@ -95,16 +105,6 @@ class Calculations {
             }
             
         }
-        
-        else if sender.tag == 11{
-            label.text = ""
-            previousNumber = 0;
-            numberOnScreen = 0;
-            operation = 0;
-        }
-        
-    
     }
-}
 
     
