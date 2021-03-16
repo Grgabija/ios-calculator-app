@@ -9,15 +9,12 @@ import Foundation
 import UIKit
 
 class Calculations {
-    var numberOnScreen: Double = 0;
-    var previousNumber: Double = 0;
-    var performingMath = false;
-    var operation = 0;
+    var numberOnScreen: Double = 0
+    var previousNumber: Double = 0
+    var performingMath = false
+    var operation = 0
     
-    
-
-    
-    func numberButtonsOnTap( _ sender: UIButton, _ label: UILabel) {
+    func numberButtonsOnTap(_ sender: UIButton, _ label: UILabel) {
         
         if performingMath == true {
             label.text = String(sender.tag-1)
@@ -31,7 +28,7 @@ class Calculations {
         }
     }
     
-    func calculationButtonsOnTap( _ sender: UIButton, _ label: UILabel) {
+    func calculationButtonsOnTap(_ sender: UIButton, _ label: UILabel) {
 
         if label.text != "" && sender.tag != 11 && sender.tag != 16 {
             
@@ -40,28 +37,23 @@ class Calculations {
             }
             previousNumber = input
             
-            if sender.tag == 12 { //Divide
-                label.text = "/";
-            }
-            
-            if sender.tag == 13 { //Multiply
-                label.text = "x";
-            }
-            
-            if sender.tag == 14 { //Subtract
-                label.text = "-";
-            }
-            
-            if sender.tag == 15 { //Add
-                label.text = "+";
-            }
-            
-            if sender.tag == 17 { //Remainder
+            switch sender.tag {
+            case 12: //Divide
+                label.text = "/"
+            case 13: //Multiply
+                label.text = "x"
+            case 14: //Subtract
+                label.text = "-"
+            case 15: //Add
+                label.text = "+"
+            case 17: //Remainder
                 label.text = "%"
+            default:
+                label.text = ""
             }
             
             operation = sender.tag
-            performingMath = true;
+            performingMath = true
             
         } else if sender.tag == 16 {
             mathematicalOperations(sender, label)
@@ -69,41 +61,35 @@ class Calculations {
         
         else if sender.tag == 11 {
             label.text = ""
-            previousNumber = 0;
-            numberOnScreen = 0;
-            operation = 0;
+            previousNumber = 0
+            numberOnScreen = 0
+            operation = 0
         }
 
     }
     
     func mathematicalOperations(_ sender: UIButton, _ label: UILabel) {
 
-            if operation == 12 { //Divide
-                guard numberOnScreen != 0 else {
-                    return label.text = "ERR0R"
-                }
-                label.text = String(previousNumber / numberOnScreen)
+        switch operation {
+        case 12: //Divide
+            guard numberOnScreen != 0 else {
+                return label.text = "ERR0R"
             }
-            
-            else if operation == 13 { //Multiply
-                label.text = String(previousNumber * numberOnScreen)
+            label.text = String(previousNumber / numberOnScreen)
+        case 13: //Multiply
+            label.text = String(previousNumber * numberOnScreen)
+        case 14: //Subtract
+            label.text = String(previousNumber - numberOnScreen)
+        case 15: //Add
+            label.text = String(previousNumber + numberOnScreen)
+        case 17: //Remainder
+            guard numberOnScreen != 0 else {
+                return label.text = "ERR0R"
             }
-            
-            else if operation == 14 { //Subtract
-                label.text = String(previousNumber - numberOnScreen)
-            }
-            
-            else if operation == 15 { //Add
-                label.text = String(previousNumber + numberOnScreen)
-            }
-            
-            else if operation == 17 { //Remainder
-                guard numberOnScreen != 0 else {
-                    return label.text = "ERR0R"
-                }
-                label.text = String(previousNumber.truncatingRemainder(dividingBy: numberOnScreen))
-            }
-            
+            label.text = String(previousNumber.truncatingRemainder(dividingBy: numberOnScreen))
+        default:
+            return
+        }
         }
     }
 
