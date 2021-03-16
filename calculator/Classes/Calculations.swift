@@ -32,9 +32,13 @@ class Calculations {
     }
     
     func calculationButtonsOnTap( _ sender: UIButton, _ label: UILabel) {
-        
-        if label.text != "" && sender.tag != 11 && sender.tag != 16{
-            previousNumber = Double(label.text!)!
+
+        if label.text != "" && sender.tag != 11 && sender.tag != 16 {
+            
+            guard let input = Double(label.text!) else {
+                return
+            }
+            previousNumber = input
             
             if sender.tag == 12 { //Divide
                 label.text = "/";
@@ -63,8 +67,11 @@ class Calculations {
         
         
         else if sender.tag == 16 {
-            
+
             if operation == 12{ //Divide
+                guard numberOnScreen != 0 else {
+                    return label.text = "ERR0R"
+                }
                 label.text = String(previousNumber / numberOnScreen)
             }
             
@@ -81,6 +88,9 @@ class Calculations {
             }
             
             else if operation == 17{ //Remainder
+                guard numberOnScreen != 0 else {
+                    return label.text = "ERR0R"
+                }
                 label.text = String(previousNumber.truncatingRemainder(dividingBy: numberOnScreen))
             }
             
