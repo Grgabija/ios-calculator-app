@@ -15,13 +15,15 @@ class Calculations {
     var operation = 0
     
     func numberButtonsOnTap(_ sender: UIButton, _ label: UILabel) {
-        
-        if performingMath == true {
+        if label.text == "ERR0R" {
+            numberOnScreen = 0
+            label.text = ""
+        }
+        else if performingMath == true {
             label.text = String(sender.tag-1)
             numberOnScreen = Double(label.text!)!
             performingMath = false
         }
-        
         else {
             label.text = label.text! + String(sender.tag-1)
             numberOnScreen = Double(label.text!)!
