@@ -52,10 +52,15 @@ class Calculations {
                 label.text = "+";
             }
             
+            if sender.tag == 17 { //Remainder
+                label.text = "%"
+            }
+            
             operation = sender.tag
             performingMath = true;
             
         }
+        
         
         else if sender.tag == 16 {
             
@@ -73,6 +78,10 @@ class Calculations {
             
             else if operation == 15{ //Add
                 label.text = String(previousNumber + numberOnScreen)
+            }
+            
+            else if operation == 17{ //Remainder
+                label.text = String(previousNumber.truncatingRemainder(dividingBy: numberOnScreen))
             }
             
         }

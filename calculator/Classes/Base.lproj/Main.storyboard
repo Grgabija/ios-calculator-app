@@ -173,7 +173,7 @@
                                     <action selector="calculatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F4P-uo-e8y"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" tag="17" contentMode="center" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0UJ-8F-8mQ">
+                            <button opaque="NO" tag="17" contentMode="center" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0UJ-8F-8mQ">
                                 <rect key="frame" x="198" y="160.66666666666663" width="118" height="118"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
@@ -181,6 +181,9 @@
                                 <state key="normal" title="%" backgroundImage="squareshape.fill" catalog="system">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="calculatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vIs-vZ-61Y"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="12" contentMode="center" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzE-OI-WMw">
                                 <rect key="frame" x="296" y="160.66666666666663" width="118" height="118"/>
