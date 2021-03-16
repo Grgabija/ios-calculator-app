@@ -9,11 +9,9 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     let calculation = Calculations()
-
     
     @IBAction func numbers(_ sender: UIButton) {
         calculation.numberButtonsOnTap(sender, calculationLabel)
-       
     }
     
     @IBOutlet weak var calculationLabel: UILabel!
@@ -28,11 +26,8 @@ class CalculatorViewController: UIViewController {
     }
     
     override func didReceiveMemoryWarning() {
-
-    super.didReceiveMemoryWarning()
-
-    // Dispose of any resources that can be recreated.
-
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
 }

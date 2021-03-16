@@ -29,7 +29,7 @@ class Calculations {
     }
     
     func calculationButtonsOnTap(_ sender: UIButton, _ label: UILabel) {
-
+        
         if label.text != "" && sender.tag != 11 && sender.tag != 16 {
             
             guard let input = Double(label.text!) else {
@@ -65,11 +65,10 @@ class Calculations {
             numberOnScreen = 0
             operation = 0
         }
-
     }
     
     func mathematicalOperations(_ sender: UIButton, _ label: UILabel) {
-
+        
         switch operation {
         case 12: //Divide
             guard numberOnScreen != 0 else {
@@ -90,7 +89,5 @@ class Calculations {
         default:
             return
         }
-        }
     }
-
-    
+}
