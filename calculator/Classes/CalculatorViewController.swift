@@ -8,32 +8,21 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    let calculation = Calculations()
+    let calculations = Calculations()
     
-    @IBAction func numbers(_ sender: UIButton) {
-        calculation.numberButtonsOnTap(sender, calculationLabel)
+    @IBOutlet private weak var calculationLabel: UILabel!
+    
+    @IBAction func onNumberTap(_ sender: UIButton) { //onNumberTap
+        let labelText = calculationLabel.text ?? ""
+        let senderTag = sender.tag
+        calculations.numberButtonOnTap(senderTag, labelText)
+        calculationLabel.text = calculations.labelText
     }
     
-    @IBOutlet weak var calculationLabel: UILabel!
-    
-    @IBAction func calculatorButtons(_ sender: UIButton) {
-        calculation.calculationButtonsOnTap(sender, calculationLabel)
+    @IBAction func onCalculatorButtonTap(_ sender: UIButton) { //onCalculatorButtonTap
+        let labelText = calculationLabel.text ?? ""
+        let senderTag = sender.tag
+        calculations.calculationButtonOnTap(senderTag, labelText)
+        calculationLabel.text = calculations.labelText
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }
-
-
-
-
-
-
