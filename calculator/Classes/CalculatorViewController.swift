@@ -12,17 +12,15 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet private weak var calculationLabel: UILabel!
     
-    @IBAction func onNumberTap(_ sender: UIButton) { //onNumberTap
-        let labelText = calculationLabel.text ?? ""
+    @IBAction func onNumberTap(_ sender: UIButton) {
         let senderTag = sender.tag
-        calculations.numberButtonOnTap(senderTag, labelText)
+        calculations.numberButtonOnTap(senderTag)
         calculationLabel.text = calculations.labelText
     }
     
-    @IBAction func onCalculatorButtonTap(_ sender: UIButton) { //onCalculatorButtonTap
-        let labelText = calculationLabel.text ?? ""
+    @IBAction func onCalculatorButtonTap(_ sender: UIButton) {
         let senderTag = sender.tag
-        calculations.calculationButtonOnTap(senderTag, labelText)
+        calculations.calculationButtonOnTap(senderTag)
         calculationLabel.text = calculations.labelText
     }
 }

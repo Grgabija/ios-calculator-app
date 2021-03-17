@@ -8,88 +8,72 @@
 import Foundation
 import UIKit
 
-enum ButtonLabels :Int {
-    case delete = 11, divide, multiply, subtract, add, equal, remainder
-    
-}
-
 class Calculations {
+    enum ButtonLabels :Int {
+        case delete = 11, divide, multiply, subtract, add, equal, remainder
+        
+    }
     var numberOnScreen = 0.0
     var previousNumber = 0.0
     var isPerformingMath = false
-    var operation = 0
+    var operation: ButtonLabels? = nil
     var isAnswerShown = false
     var labelText = ""
-
-    func numberButtonOnTap(_ senderTag: Int, _ label: String) {
+    
+    func numberButtonOnTap(_ senderTag: Int) {
         
         if labelText == "ERR0R" || isAnswerShown == true  {
+            /* or something like? :
+             numberOnScreen = Double(senderTag-1)
+             labelText = String(numberOnScreen)*/
             labelText = String(senderTag-1)
-            numberOnScreen = Double(labelText)!
+            numberOnScreen = Double(labelText) ?? 0.0
             isAnswerShown = false
         } else if isPerformingMath == true {
             labelText = String(senderTag-1)
-            numberOnScreen = Double(labelText)!
+            numberOnScreen = Double(labelText) ?? 0.0
             isPerformingMath = false
         } else {
             labelText = labelText + String(senderTag-1)
-            numberOnScreen = Double(labelText)!
+            numberOnScreen = Double(labelText) ?? 0.0
         }
     }
     
-    func calculationButtonOnTap(_ senderTag: Int, _ label: String) {
-        
-        if labelText != "", senderTag != 11, senderTag != 16 { //replace numbers
+    func calculationButtonOnTap(_ senderTag: Int) {
+        if labelText != "", ButtonLabels(rawValue: senderTag) != .delete, ButtonLabels(rawValue: senderTag) != .equal {
             guard let input = Double(labelText) else {
                 return
             }
-            
             previousNumber = input
-            
-         /*   switch ButtonLabels(rawValue: sender.tag) {
-            case .divide:
-                label.text = "/" //do the same with tag part
-            case .multiply: //Multiply
-                label.text = "x"
-            case .subtract: //Subtract
-                label.text = "-"
-            case .add: //Add
-                label.text = "+"
-            case .remainder: //Remainder
-                label.text = "%"
-            default:
-                label.text = ""
-            }*/
-            
-            operation = senderTag
+            operation = ButtonLabels(rawValue: senderTag)
             isPerformingMath = true
             isAnswerShown = false
-        } else if senderTag == 16 {
-            mathematicalOperations(senderTag, label)
+        } else if ButtonLabels(rawValue: senderTag) == .equal {
+            mathematicalOperations(senderTag)
             isAnswerShown = true
-        } else if senderTag == 11 {
+        } else if ButtonLabels(rawValue: senderTag) == .delete {
             labelText = ""
             previousNumber = 0
             numberOnScreen = 0
-            operation = 0
+            operation = nil
             isAnswerShown = false
         }
     }
-
-    func mathematicalOperations(_ senderTag: Int, _ label: String) {
+    
+    func mathematicalOperations(_ senderTag: Int) {
         switch operation {
-        case 12: //Divide
+        case .divide:
             guard numberOnScreen != 0 else {
                 return labelText = "ERR0R"
             }
             labelText = String(previousNumber / numberOnScreen)
-        case 13: //Multiply
+        case .multiply: 
             labelText = String(previousNumber * numberOnScreen)
-        case 14: //Subtract
+        case .subtract:
             labelText = String(previousNumber - numberOnScreen)
-        case 15: //Add
+        case .add:
             labelText = String(previousNumber + numberOnScreen)
-        case 17: //Remainder
+        case .remainder:
             guard numberOnScreen != 0 else {
                 return labelText = "ERR0R"
             }
