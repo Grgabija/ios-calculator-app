@@ -7,20 +7,28 @@
 
 import UIKit
 
+
 class CalculatorViewController: UIViewController {
-    let calculations = Calculations()
     
-    @IBOutlet private weak var calculationLabel: UILabel!
+    // MARK: - Declarations
+    let calculator = Calculator() 
     
+    @IBOutlet private weak var displayLabel: UILabel!
+    
+    // MARK: - Methods
     @IBAction func onNumberTap(_ sender: UIButton) {
-        let senderTag = sender.tag
-        calculations.numberButtonOnTap(senderTag)
-        calculationLabel.text = calculations.labelText
+        let number: Int = sender.tag
+        calculator.enterDigit(number)
+        displayLabel.text = calculator.displayText
     }
     
-    @IBAction func onCalculatorButtonTap(_ sender: UIButton) {
-        let senderTag = sender.tag
-        calculations.calculationButtonOnTap(senderTag)
-        calculationLabel.text = calculations.labelText
+    @IBAction func onActionButtonTap(_ sender: UIButton) {
+
+        guard let action = Calculator.ActionType(rawValue: sender.tag) else {
+            print("ERROR! unexpected buttonTag: \(sender.tag)")
+            return
+        }
+        calculator.calculationButtonOnTap(action)
+        displayLabel.text = calculator.displayText
     }
 }
