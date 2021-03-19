@@ -14,6 +14,7 @@
 		96B1DF3525FF3A5400F9FF61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B1DF3325FF3A5400F9FF61 /* Main.storyboard */; };
 		96B1DF3725FF3A5600F9FF61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96B1DF3625FF3A5600F9FF61 /* Assets.xcassets */; };
 		96B1DF3A25FF3A5600F9FF61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B1DF3825FF3A5600F9FF61 /* LaunchScreen.storyboard */; };
+		B293042B2604D0DA00BB3AF5 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B293042A2604D0DA00BB3AF5 /* Assignment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		96B1DF3625FF3A5600F9FF61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96B1DF3925FF3A5600F9FF61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96B1DF3B25FF3A5600F9FF61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B293042A2604D0DA00BB3AF5 /* Assignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				96B1DF3125FF3A5400F9FF61 /* CalculatorViewController.swift */,
 				96B1DF3325FF3A5400F9FF61 /* Main.storyboard */,
 				968529D925FF882F001994D7 /* Calculations.swift */,
+				B293042A2604D0DA00BB3AF5 /* Assignment.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 				96B1DF3225FF3A5400F9FF61 /* CalculatorViewController.swift in Sources */,
 				96B1DF2E25FF3A5400F9FF61 /* AppDelegate.swift in Sources */,
 				96B1DF3025FF3A5400F9FF61 /* SceneDelegate.swift in Sources */,
+				B293042B2604D0DA00BB3AF5 /* Assignment.swift in Sources */,
 				968529DA25FF882F001994D7 /* Calculations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
