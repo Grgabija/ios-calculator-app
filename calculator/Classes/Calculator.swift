@@ -10,11 +10,11 @@ import Foundation
 class Calculator {
     
     // MARK: - Declarations
-    var currentNumber = 0.0
-    var previousNumber = 0.0
-    var canEnterSecondNumber = false
-    var selectedAction: ActionType? = nil
-    var didTapAction = false
+    private var currentNumber = 0.0
+    private var previousNumber = 0.0
+    private var canEnterSecondNumber = false
+    private var selectedAction: ActionType? = nil
+    private var didTapAction = false
     var displayText = ""
     
     // MARK: - Methods
@@ -24,20 +24,25 @@ class Calculator {
             return
         }
         
-        if displayText == "ERR0R" || didTapAction == true  {
-            //FIXME: duplicates
-            displayText = String(digit)
-            currentNumber = Double(displayText) ?? 0.0
+        if displayText == "ERR0R" || didTapAction == true {
+            setCurrentData(digit)
             didTapAction = false
         } else if canEnterSecondNumber == true {
-            displayText = String(digit)
-            currentNumber = Double(displayText) ?? 0.0
+            setCurrentData(digit)
             canEnterSecondNumber = false
         } else {
-            // insertDigitAtTheEnd(digit)
-            displayText = displayText + String(digit)
-            currentNumber = Double(displayText) ?? 0.0
+            insertDigitAtTheEnd(digit)
         }
+    }
+    
+    private func setCurrentData(_ digit: Int) {
+        displayText = String(digit)
+        currentNumber = Double(displayText) ?? 0.0
+    }
+    
+    private func insertDigitAtTheEnd(_ digit: Int) {
+        displayText = displayText + String(digit)
+        currentNumber = Double(displayText) ?? 0.0
     }
     
     func didSelectAction(_ action: ActionType) {
@@ -46,34 +51,24 @@ class Calculator {
             return
         }
         
-        switch action { // FIXME: for practice sake, create 3 separate methods
+        switch action {
         case .startCalculations:
             calculate()
-            didTapAction = true
             
         case .reset:
-            displayText = ""
-            previousNumber = 0
-            currentNumber = 0
-            selectedAction = nil
-            didTapAction = false
+            reset()
             
         default:
-            guard let input = Double(displayText) else {
-                return
-            }
-            previousNumber = input
-            selectedAction = action
-            canEnterSecondNumber = true
-            didTapAction = false
+            selectMathematicalAction(action)
         }
     }
     
-    func calculate() {
+    private func calculate() {
         guard let action = selectedAction,
               action.isArithmeticFunction() else {
             return
         }
+        didTapAction = true
         
         switch action {
         case .divide:
@@ -102,8 +97,22 @@ class Calculator {
             return
         }
     }
+    
+    private func reset() {
+        displayText = ""
+        previousNumber = 0
+        currentNumber = 0
+        selectedAction = nil
+        didTapAction = false
+    }
+    
+    private func selectMathematicalAction(_ action: ActionType) {
+        guard let input = Double(displayText) else {
+            return
+        }
+        previousNumber = input
+        selectedAction = action
+        canEnterSecondNumber = true
+        didTapAction = false
+    }
 }
-
-
-
-

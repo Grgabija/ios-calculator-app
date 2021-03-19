@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84C541502603485F00AEBB49 /* NOTES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5414F2603485F00AEBB49 /* NOTES.swift */; };
 		84C541542603526E00AEBB49 /* Calculator+ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C541532603526E00AEBB49 /* Calculator+ActionType.swift */; };
 		968529DA25FF882F001994D7 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968529D925FF882F001994D7 /* Calculator.swift */; };
 		96B1DF2E25FF3A5400F9FF61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B1DF2D25FF3A5400F9FF61 /* AppDelegate.swift */; };
@@ -19,7 +18,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		84C5414F2603485F00AEBB49 /* NOTES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTES.swift; sourceTree = "<group>"; };
 		84C541532603526E00AEBB49 /* Calculator+ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calculator+ActionType.swift"; sourceTree = "<group>"; };
 		968529D925FF882F001994D7 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		96B1DF2A25FF3A5400F9FF61 /* calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,7 +90,6 @@
 		96B1DF2C25FF3A5400F9FF61 /* calculator */ = {
 			isa = PBXGroup;
 			children = (
-				84C5414F2603485F00AEBB49 /* NOTES.swift */,
 				960D9BBC25FF65C100E13762 /* Classes */,
 				960D9BBB25FF656F00E13762 /* Resources */,
 				96B1DF3B25FF3A5600F9FF61 /* Info.plist */,
@@ -173,7 +170,6 @@
 				96B1DF3225FF3A5400F9FF61 /* CalculatorViewController.swift in Sources */,
 				84C541542603526E00AEBB49 /* Calculator+ActionType.swift in Sources */,
 				96B1DF2E25FF3A5400F9FF61 /* AppDelegate.swift in Sources */,
-				84C541502603485F00AEBB49 /* NOTES.swift in Sources */,
 				96B1DF3025FF3A5400F9FF61 /* SceneDelegate.swift in Sources */,
 				968529DA25FF882F001994D7 /* Calculator.swift in Sources */,
 			);

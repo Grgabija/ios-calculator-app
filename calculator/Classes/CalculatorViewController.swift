@@ -11,7 +11,7 @@ import UIKit
 class CalculatorViewController: UIViewController {
     
     // MARK: - Declarations
-    let calculator = Calculator() 
+    private let calculator = Calculator()
     
     @IBOutlet private weak var displayLabel: UILabel!
     
