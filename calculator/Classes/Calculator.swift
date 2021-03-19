@@ -14,7 +14,7 @@ class Calculator {
     private var previousNumber = 0.0
     private var canEnterSecondNumber = false
     private var selectedAction: ActionType? = nil
-    private var didTapAction = false
+    private var didCalculation = false
     var displayText = ""
     
     // MARK: - Methods
@@ -24,23 +24,23 @@ class Calculator {
             return
         }
         
-        if displayText == "ERR0R" || didTapAction == true {
-            setCurrentData(digit)
-            didTapAction = false
+        if displayText == "ERR0R" || didCalculation == true {
+            updateDisplayText(digit)
+            didCalculation = false
         } else if canEnterSecondNumber == true {
-            setCurrentData(digit)
+            updateDisplayText(digit)
             canEnterSecondNumber = false
         } else {
-            insertDigitAtTheEnd(digit)
+            appendDigit(digit)
         }
     }
     
-    private func setCurrentData(_ digit: Int) {
+    private func updateDisplayText(_ digit: Int) {
         displayText = String(digit)
         currentNumber = Double(displayText) ?? 0.0
     }
     
-    private func insertDigitAtTheEnd(_ digit: Int) {
+    private func appendDigit(_ digit: Int) {
         displayText = displayText + String(digit)
         currentNumber = Double(displayText) ?? 0.0
     }
@@ -52,14 +52,17 @@ class Calculator {
         }
         
         switch action {
-        case .startCalculations:
+        case .calculate:
             calculate()
-            
+            didCalculation = true
+        
         case .reset:
             reset()
+            didCalculation = false
             
         default:
             selectMathematicalAction(action)
+            didCalculation = false
         }
     }
     
@@ -68,7 +71,6 @@ class Calculator {
               action.isArithmeticFunction() else {
             return
         }
-        didTapAction = true
         
         switch action {
         case .divide:
@@ -92,7 +94,7 @@ class Calculator {
             }
             displayText = String(previousNumber.truncatingRemainder(dividingBy: currentNumber))
             
-        case .reset, .startCalculations:
+        case .reset, .calculate: 
             print("ERROR! received non-arithmetic function: \(action)")
             return
         }
@@ -103,7 +105,6 @@ class Calculator {
         previousNumber = 0
         currentNumber = 0
         selectedAction = nil
-        didTapAction = false
     }
     
     private func selectMathematicalAction(_ action: ActionType) {
@@ -113,6 +114,5 @@ class Calculator {
         previousNumber = input
         selectedAction = action
         canEnterSecondNumber = true
-        didTapAction = false
     }
 }

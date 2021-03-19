@@ -10,11 +10,11 @@ import Foundation
 extension Calculator {
     
     enum ActionType: Int {
-        case reset = 11, divide, multiply, subtract, add, startCalculations, remainder
+        case reset = 11, divide, multiply, subtract, add, calculate, remainder
         
         func isArithmeticFunction() -> Bool {
             switch self {
-            case .reset, .startCalculations:
+            case .reset, .calculate:
                 return false
             case .add, .divide, .multiply, .remainder, .subtract:
                 return true
