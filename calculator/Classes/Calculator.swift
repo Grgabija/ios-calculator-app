@@ -6,89 +6,66 @@
 //
 
 import Foundation
-import UIKit
-
-//
-// buvo ivestas skaicius, po to buvo ivesta operacija, po to galima vesti skaiciu
-// buvo ivestas skaicius, po to buvo ivesta operacija => true
-// skaiciaus nera = false
-// operacija = false
-
-// isFirstNumberAndOperationProvided - technical // ugly + aiskesnis
-// canEnterSecondNumber - technical
-//
-//
-// isPerformingCalculation // vs. nice but misleading
-
-
-// isNumberandOperationnoptSet - technical
-// hasNothingEntered - high
 
 class Calculator {
     
     // MARK: - Declarations
     var currentNumber = 0.0
     var previousNumber = 0.0
-    
-    var isPerformingCalculation = false // FIXME: misleading
-        
+    var canEnterSecondNumber = false
     var selectedAction: ActionType? = nil
-    var isAnswerShown = false // FIXME: negalima suvedinet papildomu skaiciu, paskirtis
-                              // canEnterNumbers
+    var didTapAction = false
     var displayText = ""
     
     // MARK: - Methods
     func enterDigit(_ digit: Int) {
-        
         guard digit >= 0, digit < 10 else {
-            // print error
+            print ("ERROR! digit is out of boundaries: \(digit)")
             return
         }
         
-        if displayText == "ERR0R" || isAnswerShown == true  {
-// FIXME: del later
-//             or something like? :
-//             numberOnScreen = Double(senderTag-1)
-//             labelText = String(numberOnScreen)
-            
-            displayText = String(digit-1) // FIXME: -1 should nto be here, also is a duplication
+        if displayText == "ERR0R" || didTapAction == true  {
+            //FIXME: duplicates
+            displayText = String(digit)
             currentNumber = Double(displayText) ?? 0.0
-            isAnswerShown = false
-        } else if isPerformingCalculation == true {
-            displayText = String(digit-1) // FIXME: -1 should nto be here
+            didTapAction = false
+        } else if canEnterSecondNumber == true {
+            displayText = String(digit)
             currentNumber = Double(displayText) ?? 0.0
-            isPerformingCalculation = false
+            canEnterSecondNumber = false
         } else {
             // insertDigitAtTheEnd(digit)
-            displayText = displayText + String(digit-1) // FIXME: -1 should nto be here
+            displayText = displayText + String(digit)
             currentNumber = Double(displayText) ?? 0.0
         }
     }
     
-    func calculationButtonOnTap(_ action: ActionType) {
+    func didSelectAction(_ action: ActionType) {
+        guard displayText != "" else {
+            print ("Warning! Display text is empty")
+            return
+        }
         
-        if displayText != "",
-           action != .delete,
-           action != .equal {
+        switch action { // FIXME: for practice sake, create 3 separate methods
+        case .startCalculations:
+            calculate()
+            didTapAction = true
             
+        case .reset:
+            displayText = ""
+            previousNumber = 0
+            currentNumber = 0
+            selectedAction = nil
+            didTapAction = false
+            
+        default:
             guard let input = Double(displayText) else {
                 return
             }
             previousNumber = input
-            self.selectedAction = action
-            isPerformingCalculation = true
-            isAnswerShown = false
-            
-        } else if action == .equal {
-            calculate()
-            isAnswerShown = true
-            
-        } else if action == .delete {
-            displayText = ""
-            previousNumber = 0
-            currentNumber = 0
-            self.selectedAction = nil
-            isAnswerShown = false
+            selectedAction = action
+            canEnterSecondNumber = true
+            didTapAction = false
         }
     }
     
@@ -119,10 +96,14 @@ class Calculator {
                 return displayText = "ERR0R"
             }
             displayText = String(previousNumber.truncatingRemainder(dividingBy: currentNumber))
-        
-        case .delete, .equal:
+            
+        case .reset, .startCalculations:
             print("ERROR! received non-arithmetic function: \(action)")
             return
         }
     }
 }
+
+
+
+

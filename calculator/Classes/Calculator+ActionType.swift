@@ -10,13 +10,11 @@ import Foundation
 extension Calculator {
     
     enum ActionType: Int {
-        // FIXME: delete -> clear/reset (?)
-        // FIXME: qual -> startCalculations
-        case delete = 11, divide, multiply, subtract, add, equal, remainder
-
+        case reset = 11, divide, multiply, subtract, add, startCalculations, remainder
+        
         func isArithmeticFunction() -> Bool {
             switch self {
-            case .delete, .equal:
+            case .reset, .startCalculations:
                 return false
             case .add, .divide, .multiply, .remainder, .subtract:
                 return true
