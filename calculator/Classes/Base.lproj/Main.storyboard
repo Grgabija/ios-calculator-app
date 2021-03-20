@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -14,20 +14,20 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="CalculatorViewController" customModule="calculator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAH-YX-IYq">
-                                <rect key="frame" x="10" y="54" width="394" height="313"/>
+                                <rect key="frame" x="10" y="10" width="394" height="231"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KBn-xd-hdY">
-                                <rect key="frame" x="10" y="387" width="394" height="89"/>
+                                <rect key="frame" x="10" y="261" width="394" height="89"/>
                                 <subviews>
                                     <button opaque="NO" tag="11" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2SQ-Mg-sda">
-                                        <rect key="frame" x="0.0" y="0.0" width="194.5" height="89"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="194.66666666666666" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -35,11 +35,11 @@
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="calculatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I08-nB-uby"/>
+                                            <action selector="onActionButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I08-nB-uby"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="17" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0UJ-8F-8mQ">
-                                        <rect key="frame" x="199.5" y="0.0" width="95" height="89"/>
+                                        <rect key="frame" x="199.66666666666666" y="0.0" width="94.666666666666657" height="89"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -47,11 +47,11 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="calculatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vIs-vZ-61Y"/>
+                                            <action selector="onActionButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vIs-vZ-61Y"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="12" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzE-OI-WMw">
-                                        <rect key="frame" x="299.5" y="0.0" width="94.5" height="89"/>
+                                        <rect key="frame" x="299.33333333333331" y="0.0" width="94.666666666666686" height="89"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -59,7 +59,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="calculatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yzf-hv-FMR"/>
+                                            <action selector="onActionButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yzf-hv-FMR"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -68,10 +68,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YbS-Cz-KCw">
-                                <rect key="frame" x="10" y="481" width="394" height="89"/>
+                                <rect key="frame" x="10" y="355" width="394" height="89"/>
                                 <subviews>
                                     <button opaque="NO" tag="8" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcU-H5-92O">
-                                        <rect key="frame" x="0.0" y="0.0" width="95" height="89"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -79,11 +79,11 @@
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="numbers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l46-qd-9rJ"/>
+                                            <action selector="onNumberTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l46-qd-9rJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="9" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwe-5U-GAj">
-                                        <rect key="frame" x="100" y="0.0" width="94.5" height="89"/>
+                                        <rect key="frame" x="99.666666666666686" y="0.0" width="95" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -91,11 +91,11 @@
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="numbers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y3p-Tl-wjs"/>
+                                            <action selector="onNumberTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y3p-Tl-wjs"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="10" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOg-Xz-tbh">
-                                        <rect key="frame" x="199.5" y="0.0" width="95" height="89"/>
+                                        <rect key="frame" x="199.66666666666666" y="0.0" width="94.666666666666657" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -103,11 +103,11 @@
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="numbers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1e6-zn-5NQ"/>
+                                            <action selector="onNumberTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1e6-zn-5NQ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="13" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cQ-dt-6va">
-                                        <rect key="frame" x="299.5" y="0.0" width="94.5" height="89"/>
+                                        <rect key="frame" x="299.33333333333331" y="0.0" width="94.666666666666686" height="89"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -115,7 +115,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="calculatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jST-pv-bhu"/>
+                                            <action selector="onActionButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jST-pv-bhu"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -124,10 +124,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="lay-VB-Vjc">
-                                <rect key="frame" x="10" y="575" width="394" height="89"/>
+                                <rect key="frame" x="10" y="449" width="394" height="89"/>
                                 <subviews>
                                     <button opaque="NO" tag="5" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0AX-24-Wlu">
-                                        <rect key="frame" x="0.0" y="0.0" width="95" height="89"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -135,11 +135,11 @@
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="numbers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="acb-z6-Lzt"/>
+                                            <action selector="onNumberTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="acb-z6-Lzt"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="6" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h1K-Sh-saQ">
-                                        <rect key="frame" x="100" y="0.0" width="94.5" height="89"/>
+                                        <rect key="frame" x="99.666666666666686" y="0.0" width="95" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -147,11 +147,11 @@
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="numbers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S7j-KZ-uIJ"/>
+                                            <action selector="onNumberTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S7j-KZ-uIJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="7" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tmt-MW-MtZ">
-                                        <rect key="frame" x="199.5" y="0.0" width="95" height="89"/>
+                                        <rect key="frame" x="199.66666666666666" y="0.0" width="94.666666666666657" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -159,11 +159,11 @@
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="numbers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hN0-16-K0q"/>
+                                            <action selector="onNumberTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hN0-16-K0q"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="14" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWH-DG-2Zp">
-                                        <rect key="frame" x="299.5" y="0.0" width="94.5" height="89"/>
+                                        <rect key="frame" x="299.33333333333331" y="0.0" width="94.666666666666686" height="89"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemOrangeColor"/>
@@ -171,7 +171,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="calculatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P4M-yd-RdF"/>
+                                            <action selector="onActionButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P4M-yd-RdF"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -180,10 +180,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6iR-9A-wzs">
-                                <rect key="frame" x="10" y="669" width="294.5" height="89"/>
+                                <rect key="frame" x="10" y="543" width="294.33333333333331" height="89"/>
                                 <subviews>
                                     <button opaque="NO" tag="2" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywu-iw-LU9">
-                                        <rect key="frame" x="0.0" y="0.0" width="95" height="89"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -191,11 +191,11 @@
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="numbers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5mE-Qz-odJ"/>
+                                            <action selector="onNumberTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5mE-Qz-odJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYL-1x-mug">
-                                        <rect key="frame" x="100" y="0.0" width="94.5" height="89"/>
+                                        <rect key="frame" x="99.666666666666686" y="0.0" width="95" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -203,11 +203,11 @@
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="numbers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y1W-4x-cMi"/>
+                                            <action selector="onNumberTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y1W-4x-cMi"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0a-SX-Ao7">
-                                        <rect key="frame" x="199.5" y="0.0" width="95" height="89"/>
+                                        <rect key="frame" x="199.66666666666666" y="0.0" width="94.666666666666657" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -215,7 +215,7 @@
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="numbers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LAl-eY-9Yp"/>
+                                            <action selector="onNumberTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LAl-eY-9Yp"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -224,10 +224,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="PYM-Ak-DXd">
-                                <rect key="frame" x="10" y="763" width="294.5" height="89"/>
+                                <rect key="frame" x="10" y="637" width="294.33333333333331" height="89"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbu-x4-YCU">
-                                        <rect key="frame" x="0.0" y="0.0" width="194.5" height="89"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="194.66666666666666" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -235,11 +235,11 @@
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="numbers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cPN-Xc-6xV"/>
+                                            <action selector="onNumberTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cPN-Xc-6xV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="16" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yP-ct-TSI">
-                                        <rect key="frame" x="199.5" y="0.0" width="95" height="89"/>
+                                        <rect key="frame" x="199.66666666666666" y="0.0" width="94.666666666666657" height="89"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemOrangeColor"/>
@@ -247,7 +247,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="calculatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F4P-uo-e8y"/>
+                                            <action selector="onActionButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F4P-uo-e8y"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -256,7 +256,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" tag="15" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZC-gl-aNZ">
-                                <rect key="frame" x="309.5" y="669" width="94.5" height="183"/>
+                                <rect key="frame" x="309.33333333333331" y="543" width="94.666666666666686" height="183"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                 <color key="tintColor" systemColor="systemOrangeColor"/>
@@ -264,7 +264,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="calculatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jxs-pa-WJ8"/>
+                                    <action selector="onActionButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jxs-pa-WJ8"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -276,21 +276,16 @@
                             <constraint firstItem="KBn-xd-hdY" firstAttribute="top" secondItem="fAH-YX-IYq" secondAttribute="bottom" constant="20" id="59f-ek-yv3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KBn-xd-hdY" secondAttribute="trailing" constant="10" id="5PS-qz-uUk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PYM-Ak-DXd" secondAttribute="bottom" constant="10" id="9CU-2Q-6Mn"/>
-                            <constraint firstItem="9yP-ct-TSI" firstAttribute="top" secondItem="H0a-SX-Ao7" secondAttribute="bottom" constant="5" id="AYT-Lq-vVf"/>
-                            <constraint firstItem="YZC-gl-aNZ" firstAttribute="leading" secondItem="H0a-SX-Ao7" secondAttribute="trailing" constant="5" id="D9z-UQ-Y27"/>
                             <constraint firstItem="9yP-ct-TSI" firstAttribute="width" secondItem="H0a-SX-Ao7" secondAttribute="width" id="EUJ-vu-bEi"/>
                             <constraint firstItem="YZC-gl-aNZ" firstAttribute="width" secondItem="wWH-DG-2Zp" secondAttribute="width" id="Lxx-OX-gFQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YZC-gl-aNZ" secondAttribute="bottom" constant="10" id="N3K-Dd-7rO"/>
                             <constraint firstItem="6iR-9A-wzs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="NjK-FM-gcg"/>
-                            <constraint firstItem="3cQ-dt-6va" firstAttribute="top" secondItem="nzE-OI-WMw" secondAttribute="bottom" constant="5" id="OdP-Au-xcA"/>
                             <constraint firstItem="lay-VB-Vjc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="QXV-5u-v4b"/>
-                            <constraint firstItem="oOg-Xz-tbh" firstAttribute="top" secondItem="0UJ-8F-8mQ" secondAttribute="bottom" constant="5" id="WxT-VZ-eIy"/>
                             <constraint firstItem="lay-VB-Vjc" firstAttribute="top" secondItem="YbS-Cz-KCw" secondAttribute="bottom" constant="5" id="dRk-Ge-AeO"/>
                             <constraint firstItem="YbS-Cz-KCw" firstAttribute="top" secondItem="KBn-xd-hdY" secondAttribute="bottom" constant="5" id="enR-7w-kao"/>
                             <constraint firstItem="3cQ-dt-6va" firstAttribute="width" secondItem="nzE-OI-WMw" secondAttribute="width" id="fRx-yd-lCR"/>
                             <constraint firstItem="YZC-gl-aNZ" firstAttribute="top" secondItem="lay-VB-Vjc" secondAttribute="bottom" constant="5" id="gJM-A4-rJZ"/>
                             <constraint firstItem="YZC-gl-aNZ" firstAttribute="leading" secondItem="9yP-ct-TSI" secondAttribute="trailing" constant="4.9999999999999432" id="hxf-od-whh"/>
-                            <constraint firstItem="YZC-gl-aNZ" firstAttribute="leading" secondItem="PYM-Ak-DXd" secondAttribute="trailing" constant="5" id="liN-QE-Blf"/>
                             <constraint firstItem="fAH-YX-IYq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="qXT-O0-RWa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fAH-YX-IYq" secondAttribute="trailing" constant="10" id="ria-df-f73"/>
                             <constraint firstItem="YZC-gl-aNZ" firstAttribute="leading" secondItem="6iR-9A-wzs" secondAttribute="trailing" constant="5" id="tE1-eO-eRn"/>
@@ -305,7 +300,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="calculationLabel" destination="fAH-YX-IYq" id="ytr-jA-Hih"/>
+                        <outlet property="displayLabel" destination="fAH-YX-IYq" id="ytr-jA-Hih"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
