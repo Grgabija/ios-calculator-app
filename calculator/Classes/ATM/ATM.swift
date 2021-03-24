@@ -24,8 +24,7 @@ class ATM {
     private var previousBanknotesQuantity = 0
     private var quantityToRefill = 0
     private var remainder = 0
-    private var requiredBanknotesQuantity = 0
-    private var depositBanknotesQuantity = 0
+    private var requiredBanknotesQuantity: Dictionary<EuroBanknote,Int> = [:]
     
     // MARK: - Methods
     func refillCash() {
@@ -72,89 +71,86 @@ class ATM {
     }
     
     func withdraw(requestedSum: Int) {
-        guard requestedSum > 0 else {
+        guard requestedSum > 0, requestedSum % 5 == 0  else {
             print("Error! Requested sum is not valid")
             return
         }
-        
-        let sortedBanknotesAscending = banknotesQuantity.keys.sorted(by: {$0.rawValue > $1.rawValue})
-        for banknote in sortedBanknotesAscending {
+ 
+        let sortedBanknotesDescending = banknotesQuantity.keys.sorted(by: {$0.rawValue > $1.rawValue})
+        for banknote in sortedBanknotesDescending {
             switch banknote {
             case .fiveHundred:
                 guard banknotesQuantity[.fiveHundred] != 0, requestedSum >= banknote.rawValue, banknotesQuantity[.fiveHundred] != nil else {
                     remainder = requestedSum
-                    print("error500")
                     continue
                 }
-                requiredBanknotesQuantity = (requestedSum / (banknote.rawValue))
+                requiredBanknotesQuantity[.fiveHundred] = (requestedSum / (banknote.rawValue))
                 remainder = (requestedSum % (banknote.rawValue))
-                banknotesQuantity[.fiveHundred] = banknotesQuantity[.fiveHundred] ?? 0 - requiredBanknotesQuantity
+                banknotesQuantity[.fiveHundred] = (banknotesQuantity[.fiveHundred] ?? 0) - (requiredBanknotesQuantity[.fiveHundred] ?? 0)
                 continue
                 
             case .twoHundred:
                 guard banknotesQuantity[.twoHundred] != 0, remainder >= banknote.rawValue, banknotesQuantity[.twoHundred] != nil else {
-                    print("error200")
                     continue
                 }
-                requiredBanknotesQuantity = (remainder / (banknote.rawValue))
+                requiredBanknotesQuantity[.twoHundred] = (remainder / (banknote.rawValue))
                 remainder = (remainder % (banknote.rawValue))
-                banknotesQuantity[.twoHundred] = banknotesQuantity[.twoHundred] ?? 0 - requiredBanknotesQuantity
+                banknotesQuantity[.twoHundred] = (banknotesQuantity[.twoHundred] ?? 0) - (requiredBanknotesQuantity[.twoHundred] ?? 0)
                 continue
                 
             case .oneHundred:
                 guard banknotesQuantity[.oneHundred] != 0, remainder >= banknote.rawValue, banknotesQuantity[.oneHundred] != nil else {
-                    print("error100")
                     continue
                 }
-                requiredBanknotesQuantity = (remainder / (banknote.rawValue))
+                requiredBanknotesQuantity[.oneHundred] = (remainder / (banknote.rawValue))
                 remainder = (remainder % (banknote.rawValue))
-                banknotesQuantity[.oneHundred] = banknotesQuantity[.oneHundred] ?? 0 - requiredBanknotesQuantity
+                banknotesQuantity[.oneHundred] = (banknotesQuantity[.oneHundred] ?? 0) - (requiredBanknotesQuantity[.oneHundred] ?? 0)
                 continue
                 
             case .fifty:
                 guard banknotesQuantity[.fifty] != 0, remainder >= banknote.rawValue, banknotesQuantity[.fifty] != nil else {
-                    print("error50")
                     continue
                 }
-                requiredBanknotesQuantity = (remainder / (banknote.rawValue))
+                requiredBanknotesQuantity[.fifty] = (remainder / (banknote.rawValue))
                 remainder = (remainder % (banknote.rawValue))
-                banknotesQuantity[.fifty] = banknotesQuantity[.fifty] ?? 0 - requiredBanknotesQuantity
+                banknotesQuantity[.fifty] = (banknotesQuantity[.fifty] ?? 0) - (requiredBanknotesQuantity[.fifty] ?? 0)
                 continue
                 
             case .twenty:
                 guard banknotesQuantity[.twenty] != 0, remainder >= banknote.rawValue, banknotesQuantity[.twenty] != nil else {
-                    print("error20")
                     continue
                 }
-                requiredBanknotesQuantity = (remainder / (banknote.rawValue))
+                requiredBanknotesQuantity[.twenty] = (remainder / (banknote.rawValue))
                 remainder = (remainder % (banknote.rawValue))
-                banknotesQuantity[.twenty] = banknotesQuantity[.twenty] ?? 0 - requiredBanknotesQuantity
+                banknotesQuantity[.twenty] = (banknotesQuantity[.twenty] ?? 0) - (requiredBanknotesQuantity[.twenty] ?? 0)
                 continue
                 
             case .ten:
                 guard banknotesQuantity[.ten] != 0, remainder >= banknote.rawValue, banknotesQuantity[.ten] != nil else {
-                    print("error10")
                     continue
                 }
-                requiredBanknotesQuantity = (remainder / (banknote.rawValue))
+                requiredBanknotesQuantity[.ten] = (remainder / (banknote.rawValue))
                 remainder = (remainder % (banknote.rawValue))
-                banknotesQuantity[.ten] = banknotesQuantity[.ten] ?? 0 - requiredBanknotesQuantity
+                banknotesQuantity[.ten] = (banknotesQuantity[.ten] ?? 0) - (requiredBanknotesQuantity[.ten] ?? 0)
                 continue
                 
             case .five:
                 guard banknotesQuantity[.five] != 0, remainder >= banknote.rawValue, banknotesQuantity[.five] != nil else {
-                    print("error5")
-                    return
+                    break
                 }
-                requiredBanknotesQuantity = (remainder / (banknote.rawValue))
+                requiredBanknotesQuantity[.five] = (remainder / (banknote.rawValue))
                 remainder = (remainder % (banknote.rawValue))
-                banknotesQuantity[.five] = banknotesQuantity[.five] ?? 0 - requiredBanknotesQuantity
+                banknotesQuantity[.five] = (banknotesQuantity[.five] ?? 0) - (requiredBanknotesQuantity[.five] ?? 0)
+                break
             }
+            break
         }
         
+        for (banknoteValue, quantity) in requiredBanknotesQuantity.sorted(by: {$0.key.rawValue > $1.key.rawValue}) {
+            print("\(banknoteValue.rawValue): \(quantity)")
+            
+        }
         //FIXME: delete after implementation
-        //return dictionary/print it
-        //if sum is not valid, e.g. 251, 252, and etc.
         //get reoccuring cases into private method
         //least amount of banknotes necessary with banknotes that are available
         //aka Prefer small banknotes
@@ -178,3 +174,4 @@ class ATM {
         //banknote quantity add to overall atm banknote quantity
     }
 }
+
