@@ -20,53 +20,42 @@ class ATM {
              five = 5
     }
     
-    private var banknotesQuantity: [EuroBanknote:Int] = [:]
-    private var previousBanknotesQuantity = 0
-    private var quantityToRefill = 0
-    private var requiredBanknotesQuantity: [EuroBanknote:Int] = [:]
+    private let genericBanknoteQuantity: [EuroBanknote:Int] =
+        [.fiveHundred: 20,
+         .twoHundred: 20,
+         .oneHundred: 40,
+         .fifty: 50,
+         .twenty: 100,
+         .ten: 150,
+         .five: 200
+        ]
+    
+    private var banknotesQuantity: [EuroBanknote:Int] =
+        [.fiveHundred: 0,
+         .twoHundred: 0,
+         .oneHundred: 0,
+         .fifty: 0,
+         .twenty: 0,
+         .ten: 0,
+         .five: 0
+        ]
     
     // MARK: - Methods
     func refillCash() {
-        previousBanknotesQuantity = banknotesQuantity[.fiveHundred] ?? 0
-        quantityToRefill = (20 - previousBanknotesQuantity)
-        banknotesQuantity[.fiveHundred] = (previousBanknotesQuantity + quantityToRefill)
-        print("ATM were refilled with \(quantityToRefill): 500€ banknotes")
+
+        var previousBanknotesQuantity = 0
+        var quantityToRefill: [EuroBanknote:Int] = [:]
+        let sortedBanknotesDescending = sortBanknotesDescending()
         
-        previousBanknotesQuantity = banknotesQuantity[.twoHundred] ?? 0
-        quantityToRefill = (20 - previousBanknotesQuantity)
-        banknotesQuantity[.twoHundred] = (previousBanknotesQuantity + quantityToRefill)
-        print("ATM were refilled with \(quantityToRefill): 200€ banknotes")
-        
-        previousBanknotesQuantity = banknotesQuantity[.oneHundred] ?? 0
-        quantityToRefill = (40 - previousBanknotesQuantity)
-        banknotesQuantity[.oneHundred] = (previousBanknotesQuantity + quantityToRefill)
-        print("ATM were refilled with \(quantityToRefill): 100€ banknotes")
-        
-        previousBanknotesQuantity = banknotesQuantity[.fifty] ?? 0
-        quantityToRefill = (50 - previousBanknotesQuantity)
-        banknotesQuantity[.fifty] = (previousBanknotesQuantity + quantityToRefill)
-        print("ATM were refilled with \(quantityToRefill): 50€ banknotes")
-        
-        previousBanknotesQuantity = banknotesQuantity[.twenty] ?? 0
-        quantityToRefill = (100 - previousBanknotesQuantity)
-        banknotesQuantity[.twenty] = (previousBanknotesQuantity + quantityToRefill)
-        print("ATM were refilled with \(quantityToRefill): 20€ banknotes")
-        
-        previousBanknotesQuantity = banknotesQuantity[.ten] ?? 0
-        quantityToRefill=(150 - previousBanknotesQuantity)
-        banknotesQuantity[.ten] = (previousBanknotesQuantity + quantityToRefill)
-        print("ATM were refilled with \(quantityToRefill): 10€ banknotes")
-        
-        previousBanknotesQuantity = banknotesQuantity[.five] ?? 0
-        quantityToRefill=(200 - previousBanknotesQuantity)
-        banknotesQuantity[.five] = (previousBanknotesQuantity + quantityToRefill)
-        print("ATM were refilled with \(quantityToRefill): 5€ banknotes")
-        
-        //FIXME: delete after implementation
-        //make those magic numbers into genericQuantity (enum),
-        //after that get reoccuring cases into private method
-        //add up to some number 25 000
-        //20x 500, 20x 200, 40x 100, 50x 50, 100x 20, 150x 10, 200x 5
+        for banknote in sortedBanknotesDescending {
+            previousBanknotesQuantity = banknotesQuantity[banknote] ?? 0
+            quantityToRefill[banknote] = (genericBanknoteQuantity[banknote] ?? 0) - previousBanknotesQuantity
+            banknotesQuantity[banknote] = previousBanknotesQuantity + (quantityToRefill[banknote] ?? 0)
+            guard (quantityToRefill[banknote] ?? 0) > 0 else {
+                continue
+            }
+            print("ATM were refilled with \(quantityToRefill[banknote] ?? 0): \(banknote.rawValue)€ banknotes")
+        }
     }
     
     func withdraw(requestedSum: Int) {
@@ -74,9 +63,9 @@ class ATM {
             print("Error! Requested sum is not valid")
             return
         }
-        
-        let sortedBanknotesDescending = banknotesQuantity.keys.sorted(by: {$0.rawValue > $1.rawValue})
         var remainingSum = requestedSum
+        let sortedBanknotesDescending = sortBanknotesDescending()
+        var requiredBanknotesQuantity: [EuroBanknote:Int] = [:]
         
         for banknote in sortedBanknotesDescending {
             guard banknotesQuantity[banknote] != 0, remainingSum >= banknote.rawValue, banknotesQuantity[banknote] != nil else {
@@ -89,29 +78,33 @@ class ATM {
         }
         
         for (banknoteValue, quantity) in requiredBanknotesQuantity.sorted(by: {$0.key.rawValue > $1.key.rawValue}) {
-            print("\(banknoteValue.rawValue): \(quantity)")
+            print("Withdrawn: \(banknoteValue.rawValue): \(quantity)")
         }
         //FIXME: delete after implementation
-        //least amount of banknotes necessary with banknotes that are available
-        //aka Prefer small banknotes
+        //Prefer small banknotes
+    }
+    
+    private func sortBanknotesDescending() -> Array<EuroBanknote> {
+        let sortedBanknotes = banknotesQuantity.keys.sorted(by: {$0.rawValue > $1.rawValue})
+        return sortedBanknotes
     }
     
     func deposit(banknotes: [EuroBanknote]) {
-        //TODO: Guard
-        //        guard depositBanknotesQuantity > 0, depositBanknotesQuantity <= quantityToRefill else {
-        //            print ("ERROR! wrong banknotes quantity: \(depositBanknotesQuantity)")
-        //            return
-        //        }
+        //TODO: By the logic, is this guard needed? Either should it be the error, or should it "add to bank account 0"?
+        guard banknotes.count > 0 else {
+                    print ("ERROR! wrong banknotes quantity")
+                    return
+                }
         var insertedSum = 0
         for banknoteNumber in banknotes {
-            banknotesQuantity[banknoteNumber] = banknotesQuantity[banknoteNumber] ?? 0 + 1
+            guard (banknotesQuantity[banknoteNumber] ?? 0) < (genericBanknoteQuantity[banknoteNumber] ?? 0) else {
+                print("There is not enough space in ATM to deposit")
+                return
+            }
+            banknotesQuantity[banknoteNumber] = (banknotesQuantity[banknoteNumber] ?? 0) + 1
             insertedSum = insertedSum + banknoteNumber.rawValue
         }
-        print(insertedSum)
-        
-        //FIXME: delete after implementation
-        //print banknotes quantity and what type of banknotes were added, banknotes sum
-        //banknote quantity add to overall atm banknote quantity
+        print("Added to the bank account \(insertedSum)€")
     }
 }
 
