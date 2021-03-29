@@ -10,7 +10,7 @@ import UIKit
 
 class ATM {
     // MARK: - Declarations
-    enum EuroBanknote: Int {
+    enum Banknote: Int {
         case fiveHundred = 500,
              twoHundred = 200,
              oneHundred = 100,
@@ -20,7 +20,7 @@ class ATM {
              five = 5
     }
     
-    private let genericBanknoteQuantity: [EuroBanknote:Int] =
+    private let genericBanknoteQuantity: [Banknote:Int] = //default or base, same for all banknotes. No upper limit. Only as a starting value.
         [.fiveHundred: 20,
          .twoHundred: 20,
          .oneHundred: 40,
@@ -28,9 +28,9 @@ class ATM {
          .twenty: 100,
          .ten: 150,
          .five: 200
-        ]
+        ] //INFINITE POWER
     
-    private var banknotesQuantity: [EuroBanknote:Int] =
+    private var banknotesQuantity: [Banknote:Int] =
         [.fiveHundred: 0,
          .twoHundred: 0,
          .oneHundred: 0,
@@ -38,23 +38,22 @@ class ATM {
          .twenty: 0,
          .ten: 0,
          .five: 0
-        ]
+        ] //seperate class, holds type and quantity, init for type and quantity and update
     
     // MARK: - Methods
-    func refillCash() {
-
+    func refillCash() { //reset method
         var previousBanknotesQuantity = 0
-        var quantityToRefill: [EuroBanknote:Int] = [:]
+        var quantityToRefill: [Banknote:Int] = [:]
         let sortedBanknotesDescending = sortBanknotesDescending()
-        
+        //guard early exits only
         for banknote in sortedBanknotesDescending {
             previousBanknotesQuantity = banknotesQuantity[banknote] ?? 0
             quantityToRefill[banknote] = (genericBanknoteQuantity[banknote] ?? 0) - previousBanknotesQuantity
             banknotesQuantity[banknote] = previousBanknotesQuantity + (quantityToRefill[banknote] ?? 0)
-            guard (quantityToRefill[banknote] ?? 0) > 0 else {
-                continue
-            }
-            print("ATM were refilled with \(quantityToRefill[banknote] ?? 0): \(banknote.rawValue)€ banknotes")
+            if (quantityToRefill[banknote] ?? 0) > 0 {
+                print("ATM were refilled with \(quantityToRefill[banknote] ?? 0): \(banknote.rawValue)€ banknotes")} else {
+                    continue
+                }
         }
     }
     
@@ -63,44 +62,41 @@ class ATM {
             print("Error! Requested sum is not valid")
             return
         }
+        
         var remainingSum = requestedSum
         let sortedBanknotesDescending = sortBanknotesDescending()
-        var requiredBanknotesQuantity: [EuroBanknote:Int] = [:]
+        var requiredBanknotesList: [Banknote:Int] = [:]
         
         for banknote in sortedBanknotesDescending {
-            guard banknotesQuantity[banknote] != 0, remainingSum >= banknote.rawValue, banknotesQuantity[banknote] != nil else {
+            guard banknotesQuantity[banknote] != 0, remainingSum >= banknote.rawValue, banknotesQuantity[banknote] != nil else { //with optional values, to check if something is available
                 continue
             }
             
-            requiredBanknotesQuantity[banknote] = (remainingSum / (banknote.rawValue))
+            requiredBanknotesList[banknote] = (remainingSum / (banknote.rawValue))
             remainingSum = (requestedSum % (banknote.rawValue))
-            banknotesQuantity[banknote] = (banknotesQuantity[banknote] ?? 0) - (requiredBanknotesQuantity[banknote] ?? 0)
+            banknotesQuantity[banknote] = (banknotesQuantity[banknote] ?? 0) - (requiredBanknotesList[banknote] ?? 0)
         }
         
-        for (banknoteValue, quantity) in requiredBanknotesQuantity.sorted(by: {$0.key.rawValue > $1.key.rawValue}) {
+        for (banknoteValue, quantity) in requiredBanknotesList.sorted(by: {$0.key.rawValue > $1.key.rawValue}) {
             print("Withdrawn: \(banknoteValue.rawValue): \(quantity)")
         }
         //FIXME: delete after implementation
         //Prefer small banknotes
     }
     
-    private func sortBanknotesDescending() -> Array<EuroBanknote> {
+    private func sortBanknotesDescending() -> [Banknote] { //chech where and how many times it is used
         let sortedBanknotes = banknotesQuantity.keys.sorted(by: {$0.rawValue > $1.rawValue})
         return sortedBanknotes
     }
     
-    func deposit(banknotes: [EuroBanknote]) {
-        //TODO: By the logic, is this guard needed? Either should it be the error, or should it "add to bank account 0"?
+    func deposit(banknotes: [Banknote]) {
         guard banknotes.count > 0 else {
                     print ("ERROR! wrong banknotes quantity")
                     return
                 }
+        
         var insertedSum = 0
         for banknoteNumber in banknotes {
-            guard (banknotesQuantity[banknoteNumber] ?? 0) < (genericBanknoteQuantity[banknoteNumber] ?? 0) else {
-                print("There is not enough space in ATM to deposit")
-                return
-            }
             banknotesQuantity[banknoteNumber] = (banknotesQuantity[banknoteNumber] ?? 0) + 1
             insertedSum = insertedSum + banknoteNumber.rawValue
         }
