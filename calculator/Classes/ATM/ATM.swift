@@ -10,17 +10,17 @@ import UIKit
 
 class ATM {
     // MARK: - Declarations
-    enum Banknote: Int {
-        case fiveHundred = 500,
-             twoHundred = 200,
-             oneHundred = 100,
-             fifty = 50,
-             twenty = 20,
+    enum BanknoteEnum: Int {
+        case five = 5,
              ten = 10,
-             five = 5
+             twenty = 20,
+             fifty = 50,
+             oneHundred = 100,
+             twoHundred = 200,
+             fiveHundred = 500
     }
     
-    private let genericBanknoteQuantity: [Banknote:Int] = //default or base, same for all banknotes. No upper limit. Only as a starting value.
+    private let genericBanknoteQuantity: [BanknoteEnum:Int] = //default or base, same for all banknotes. No upper limit. Only as a starting value.
         [.fiveHundred: 20,
          .twoHundred: 20,
          .oneHundred: 40,
@@ -30,7 +30,7 @@ class ATM {
          .five: 200
         ] //INFINITE POWER
     
-    private var banknotesQuantity: [Banknote:Int] =
+    private var banknotesQuantity: [BanknoteEnum:Int] =
         [.fiveHundred: 0,
          .twoHundred: 0,
          .oneHundred: 0,
@@ -40,21 +40,20 @@ class ATM {
          .five: 0
         ] //seperate class, holds type and quantity, init for type and quantity and update
     
+    var banknotes = [
+        Banknote(banknoteType: .five, quantity: 0),
+        Banknote(banknoteType: .ten, quantity: 0),
+        Banknote(banknoteType: .twenty, quantity: 0),
+        Banknote(banknoteType: .fifty, quantity: 0),
+        Banknote(banknoteType: .oneHundred, quantity: 0),
+        Banknote(banknoteType: .twoHundred, quantity: 0),
+        Banknote(banknoteType: .fiveHundred, quantity: 0)
+    ]
+    
+    
     // MARK: - Methods
-    func refillCash() { //reset method
-        var previousBanknotesQuantity = 0
-        var quantityToRefill: [Banknote:Int] = [:]
-        let sortedBanknotesDescending = sortBanknotesDescending()
-        //guard early exits only
-        for banknote in sortedBanknotesDescending {
-            previousBanknotesQuantity = banknotesQuantity[banknote] ?? 0
-            quantityToRefill[banknote] = (genericBanknoteQuantity[banknote] ?? 0) - previousBanknotesQuantity
-            banknotesQuantity[banknote] = previousBanknotesQuantity + (quantityToRefill[banknote] ?? 0)
-            if (quantityToRefill[banknote] ?? 0) > 0 {
-                print("ATM were refilled with \(quantityToRefill[banknote] ?? 0): \(banknote.rawValue)€ banknotes")} else {
-                    continue
-                }
-        }
+    func refillCash() {
+       banknotes.forEach { $0.update(quantity: 20) }
     }
     
     func withdraw(requestedSum: Int) {
@@ -65,7 +64,7 @@ class ATM {
         
         var remainingSum = requestedSum
         let sortedBanknotesDescending = sortBanknotesDescending()
-        var requiredBanknotesList: [Banknote:Int] = [:]
+        var requiredBanknotesList: [BanknoteEnum:Int] = [:]
         
         for banknote in sortedBanknotesDescending {
             guard banknotesQuantity[banknote] != 0, remainingSum >= banknote.rawValue, banknotesQuantity[banknote] != nil else { //with optional values, to check if something is available
@@ -84,12 +83,12 @@ class ATM {
         //Prefer small banknotes
     }
     
-    private func sortBanknotesDescending() -> [Banknote] { //chech where and how many times it is used
+    private func sortBanknotesDescending() -> [BanknoteEnum] { //chech where and how many times it is used
         let sortedBanknotes = banknotesQuantity.keys.sorted(by: {$0.rawValue > $1.rawValue})
         return sortedBanknotes
     }
     
-    func deposit(banknotes: [Banknote]) {
+    func deposit(banknotes: [BanknoteEnum]) {
         guard banknotes.count > 0 else {
                     print ("ERROR! wrong banknotes quantity")
                     return
