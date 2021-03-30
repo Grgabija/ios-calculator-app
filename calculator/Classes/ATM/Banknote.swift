@@ -11,11 +11,21 @@ import Foundation
 class Banknote {
     
     // MARK: - Declarations
+    enum BanknoteType {
+        case fiveHundred,
+             twoHundred,
+             oneHundred,
+             fifty,
+             twenty,
+             ten,
+             five
+    }
+    
     var banknoteType: BanknoteType
     var quantity: Int
-
+    
     // MARK: - Methods
-    init(banknoteType: BanknoteType, quantity: Int) {
+    init(_ banknoteType: BanknoteType, _ quantity: Int) {
         self.banknoteType = banknoteType
         self.quantity = quantity
     }
@@ -26,27 +36,3 @@ class Banknote {
     }
     
 }
-
-enum BanknoteType {
-    case fiveHundred,
-         twoHundred,
-         oneHundred,
-         fifty,
-         twenty,
-         ten,
-         five
-}
-//private var banknotesQuantity: [BanknoteType:Int] =
-//    [.fiveHundred: 0,
-//     .twoHundred: 0,
-//     .oneHundred: 0,
-//     .fifty: 0,
-//     .twenty: 0,
-//     .ten: 0,
-//     .five: 0
-//    ]
-//
-//func quantity(){
-//    let banknoteQuantity = banknotesQuantity.values.compactMap {Int($0)}
-//    print(banknoteQuantity)
-//}

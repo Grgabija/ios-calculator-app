@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class ATM {
+    
     // MARK: - Declarations
     enum BanknoteEnum: Int {
         case five = 5,
@@ -20,16 +21,6 @@ class ATM {
              fiveHundred = 500
     }
     
-    private let genericBanknoteQuantity: [BanknoteEnum:Int] = //default or base, same for all banknotes. No upper limit. Only as a starting value.
-        [.fiveHundred: 20,
-         .twoHundred: 20,
-         .oneHundred: 40,
-         .fifty: 50,
-         .twenty: 100,
-         .ten: 150,
-         .five: 200
-        ] //INFINITE POWER
-    
     private var banknotesQuantity: [BanknoteEnum:Int] =
         [.fiveHundred: 0,
          .twoHundred: 0,
@@ -40,20 +31,19 @@ class ATM {
          .five: 0
         ] //seperate class, holds type and quantity, init for type and quantity and update
     
-    var banknotes = [
-        Banknote(banknoteType: .five, quantity: 0),
-        Banknote(banknoteType: .ten, quantity: 0),
-        Banknote(banknoteType: .twenty, quantity: 0),
-        Banknote(banknoteType: .fifty, quantity: 0),
-        Banknote(banknoteType: .oneHundred, quantity: 0),
-        Banknote(banknoteType: .twoHundred, quantity: 0),
-        Banknote(banknoteType: .fiveHundred, quantity: 0)
+    let banknotes = [
+        Banknote(.five, 0),
+        Banknote(.ten, 0),
+        Banknote(.twenty, 0),
+        Banknote(.fifty, 0),
+        Banknote(.oneHundred, 0),
+        Banknote(.twoHundred, 0),
+        Banknote(.fiveHundred, 0)
     ]
-    
     
     // MARK: - Methods
     func refillCash() {
-       banknotes.forEach { $0.update(quantity: 20) }
+        banknotes.forEach { $0.update(quantity: 20) }
     }
     
     func withdraw(requestedSum: Int) {
@@ -87,19 +77,18 @@ class ATM {
         let sortedBanknotes = banknotesQuantity.keys.sorted(by: {$0.rawValue > $1.rawValue})
         return sortedBanknotes
     }
-    
-    func deposit(banknotes: [BanknoteEnum]) {
+    func deposit(banknotes: [Banknote]) {
         guard banknotes.count > 0 else {
-                    print ("ERROR! wrong banknotes quantity")
-                    return
-                }
-        
-        var insertedSum = 0
-        for banknoteNumber in banknotes {
-            banknotesQuantity[banknoteNumber] = (banknotesQuantity[banknoteNumber] ?? 0) + 1
-            insertedSum = insertedSum + banknoteNumber.rawValue
+            print ("ERROR! wrong banknotes quantity")
+            return
         }
-        print("Added to the bank account \(insertedSum)€")
+        
+        for banknote in banknotes {
+            let banknoteToUpdate = self.banknotes.first(where: { $0.banknoteType == banknote.banknoteType})
+            banknoteToUpdate?.update(quantity: banknoteToUpdate?.quantity ?? 0 + banknote.quantity)
+            print("Added to the bank account \(banknote.banknoteType): \(banknote.quantity)")
+        }
+        
     }
 }
 
