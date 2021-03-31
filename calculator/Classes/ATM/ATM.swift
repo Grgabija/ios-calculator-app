@@ -44,7 +44,7 @@ class ATM {
         for banknote in banknotes {
             requiredBanknotesList[banknote.banknoteType] = (remainingSum / (banknote.banknoteType.rawValue))
             remainingSum = (remainingSum % (banknote.banknoteType.rawValue))
-
+            
             if ((requiredBanknotesList[banknote.banknoteType] ?? 0) <= banknote.quantity){
                 
                 newQuantity = banknote.quantity - (requiredBanknotesList[banknote.banknoteType] ?? 0)
@@ -52,15 +52,13 @@ class ATM {
                 if ((requiredBanknotesList[banknote.banknoteType] ?? 0) > 0) {
                     banknote.update(quantity: newQuantity)
                     print("Withdrawn: \(banknote.banknoteType.rawValue): \(requiredBanknotesList[banknote.banknoteType] ?? 0)")
-                } else {
-                    continue
                 }
                 
             } else {
                 print("Error! Not enough banknotes left for the requested sum")
             }
         }
-
+        
         //FIXME: delete after implementation
         //Prefer small banknotes
     }
@@ -72,9 +70,16 @@ class ATM {
         }
         
         for banknote in banknotes {
-            let banknoteToUpdate = self.banknotes.first(where: { $0.banknoteType == banknote.banknoteType})
-            banknoteToUpdate?.update(quantity: banknoteToUpdate?.quantity ?? 0 + banknote.quantity)
-            print("Added to the bank account \(banknote.banknoteType.rawValue): \(banknote.quantity)")
+            
+            if (banknote.quantity > 0) {
+                let banknoteToUpdate = self.banknotes.first(where: { $0.banknoteType == banknote.banknoteType})
+                banknoteToUpdate?.update(quantity: banknoteToUpdate?.quantity ?? 0 + banknote.quantity)
+                print("Added to the bank account \(banknote.banknoteType.rawValue): \(banknote.quantity)")
+            } else {
+                print ("ERROR! wrong banknotes quantity")
+                
+            }
+            
         }
         
     }
