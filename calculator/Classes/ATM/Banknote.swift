@@ -11,14 +11,14 @@ import Foundation
 class Banknote {
     
     // MARK: - Declarations
-    enum BanknoteType {
-        case fiveHundred,
-             twoHundred,
-             oneHundred,
-             fifty,
-             twenty,
-             ten,
-             five
+    enum BanknoteType: Int {
+        case five = 5,
+             ten = 10,
+             twenty = 20,
+             fifty = 50,
+             oneHundred = 100,
+             twoHundred = 200,
+             fiveHundred = 500
     }
     
     var banknoteType: BanknoteType
@@ -32,7 +32,6 @@ class Banknote {
     
     func update(quantity:Int) {
         self.quantity = quantity
-        print("\(banknoteType): \(quantity)")
     }
     
 }
