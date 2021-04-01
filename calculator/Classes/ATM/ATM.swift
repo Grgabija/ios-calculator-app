@@ -9,23 +9,16 @@ import Foundation
 import UIKit
 
 class ATM {
-    
+
+    // MARK: - Constants
+    let defaultQuantity = 20
+
     // MARK: - Declarations
-    var banknotes = [
-        Banknote(.five, 0),
-        Banknote(.ten, 0),
-        Banknote(.twenty, 0),
-        Banknote(.fifty, 0),
-        Banknote(.oneHundred, 0),
-        Banknote(.twoHundred, 0),
-        Banknote(.fiveHundred, 0)
-    ]
+    var banknotes: [Banknote] = []
     
     // MARK: - Methods
     func refillCash() {
-        let resetValue = 20
-        
-        banknotes.forEach { $0.update(quantity: resetValue) }
+        banknotes.forEach { $0.update(quantity: defaultQuantity) }
         print("ATM was refilled")
     }
     
@@ -34,33 +27,35 @@ class ATM {
             print("Error! Requested sum is not valid")
             return
         }
-        
+
+        guard banknotes.isEmpty == false else {
+            print("Error! ATM is empty")
+            return
+        }
+
         var remainingSum = requestedSum
-        var requiredBanknotesList: [Banknote.BanknoteType:Int] = [:]
+        var requiredBanknotes: [Banknote] = []
         var newQuantity = 0
         
-        banknotes.sort(by: {$0.banknoteType.rawValue > $1.banknoteType.rawValue})
-        
-        for banknote in banknotes {
-            requiredBanknotesList[banknote.banknoteType] = (remainingSum / (banknote.banknoteType.rawValue))
-            remainingSum = (remainingSum % (banknote.banknoteType.rawValue))
-            
-            if ((requiredBanknotesList[banknote.banknoteType] ?? 0) <= banknote.quantity){
-                
-                newQuantity = banknote.quantity - (requiredBanknotesList[banknote.banknoteType] ?? 0)
-                
-                if ((requiredBanknotesList[banknote.banknoteType] ?? 0) > 0) {
-                    banknote.update(quantity: newQuantity)
-                    print("Withdrawn: \(banknote.banknoteType.rawValue): \(requiredBanknotesList[banknote.banknoteType] ?? 0)")
-                }
-                
-            } else {
-                print("Error! Not enough banknotes left for the requested sum")
-            }
-        }
-        
-        //FIXME: delete after implementation
-        //Prefer small banknotes
+//        banknotes.sort(by: {$0.banknoteType.rawValue > $1.banknoteType.rawValue})
+//
+//        for banknote in banknotes {
+//            requiredBanknotesList[banknote.banknoteType] = (remainingSum / (banknote.banknoteType.rawValue))
+//            remainingSum = (remainingSum % (banknote.banknoteType.rawValue))
+//
+//            if ((requiredBanknotesList[banknote.banknoteType] ?? 0) <= banknote.quantity){
+//
+//                newQuantity = banknote.quantity - (requiredBanknotesList[banknote.banknoteType] ?? 0)
+//
+//                if ((requiredBanknotesList[banknote.banknoteType] ?? 0) > 0) {
+//                    banknote.update(quantity: newQuantity)
+//                    print("Withdrawn: \(banknote.banknoteType.rawValue): \(requiredBanknotesList[banknote.banknoteType] ?? 0)")
+//                }
+//
+//            } else {
+//                print("Error! Not enough banknotes left for the requested sum")
+//            }
+//        }
     }
     
     func deposit(banknotes: [Banknote]) {

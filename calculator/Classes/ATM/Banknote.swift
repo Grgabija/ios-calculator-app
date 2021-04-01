@@ -11,14 +11,14 @@ import Foundation
 class Banknote {
     
     // MARK: - Declarations
-    enum BanknoteType: Int {
-        case five = 5,
-             ten = 10,
-             twenty = 20,
-             fifty = 50,
-             oneHundred = 100,
-             twoHundred = 200,
-             fiveHundred = 500
+    enum BanknoteType: Int { // FIXME: adjust naming, now you have double Banknote. Consider separating
+        case five = 5
+        case ten = 10
+        case twenty = 20
+        case fifty = 50
+        case oneHundred = 100
+        case twoHundred = 200
+        case fiveHundred = 500
     }
     
     var banknoteType: BanknoteType
@@ -30,7 +30,7 @@ class Banknote {
         self.quantity = quantity
     }
     
-    func update(quantity:Int) {
+    func update(quantity: Int) {
         self.quantity = quantity
     }
     
