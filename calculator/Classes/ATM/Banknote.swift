@@ -34,4 +34,12 @@ class Banknote {
         self.quantity = quantity
     }
     
+    func isSmallBanknote() -> Bool {
+        switch banknoteType {
+        case .fifty, .oneHundred, .twoHundred, .fiveHundred:
+            return false
+        case .five, .ten, .twenty:
+            return true
+        }
+    }
 }
