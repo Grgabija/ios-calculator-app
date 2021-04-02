@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let atm = ATM()
         atm.refillCash()
         atm.withdraw(requestedSum: 155, requiresSmallBanknotes: false)
-        atm.deposit(banknoteList: [Banknote(.fifty, 50), Banknote(.five, 0), Banknote(.fifty, 5)])
+        atm.deposit(banknotes: [Banknote(.fifty, 50), Banknote(.five, 0), Banknote(.fifty, 5)])
         // Override point for customization after application launch.
         return true
     }
