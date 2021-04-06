@@ -9,18 +9,17 @@ import Foundation
 import UIKit
 
 class ATM {
-
+    
     // MARK: - Constants
     let defaultQuantity = 20
-
+    
     // MARK: - Declarations
     var banknoteList: [Banknote] = []
     
     // MARK: - Methods
     // MARK: - Public
     func refillCash() {
-        banknoteList = Banknote.BanknoteVariant.allCases.map { Banknote($0, 0) }
-        print(banknoteList)
+        banknoteList = Banknote.TypeOfBanknote.allCases.map { Banknote($0, defaultQuantity) }
         banknoteList.forEach { $0.update(quantity: defaultQuantity) }
         print("ATM was refilled")
     }
@@ -49,109 +48,54 @@ class ATM {
             print("Error! Requested sum is not valid")
             return
         }
-
+        
         guard banknoteList.isEmpty == false else {
             print("Error! ATM is empty")
             return
         }
-        let requiredBanknoteList: [Banknote] = []
-        let banknotesSorted: [Banknote]
+        var requiredBanknoteList: [Banknote] = []
+        let sortedBanknotesList: [Banknote]
         var remainingSum = requestedSum
         
         if requiresSmallBanknotes{
-            banknotesSorted = sortedSmallBanknotes()
+            sortedBanknotesList = sortedSmallBanknotesDescending()
         } else {
-            banknotesSorted = banknotesSortedDescending()
+            sortedBanknotesList = sortedBanknotesDescending()
         }
         
-        for banknote in banknotesSorted {
-            remainingSum = calculateBanknotesForWithdrawal(banknotesInATM: banknote, remainingSum: remainingSum, requiredBanknoteList: requiredBanknoteList)
+        for banknote in sortedBanknotesList {
+            let banknote = calculateRequiredBanknote(banknoteInATM: banknote, remainingSum: remainingSum)
+            remainingSum = remainingSum - (banknote.quantity * banknote.banknoteValue())
+            requiredBanknoteList.append(banknote)
         }
     }
     
     // MARK: - Private
-    private func calculateBanknotesForWithdrawal(banknotesInATM: Banknote, remainingSum: Int, requiredBanknoteList: [Banknote]) -> Int {  //FIXME: naming
-        // Naming of a method should be based on what a method does, not information outside of that
-        // method. A method has no idea who called it and for what reason
+    private func calculateRequiredBanknote(banknoteInATM: Banknote, remainingSum: Int) -> Banknote {
+        let banknoteQuantity = (remainingSum / (banknoteInATM.banknoteValue()))
+        let newBanknoteQuantity = banknoteInATM.quantity - banknoteQuantity
         
-//        guard let banknote = (requiredBanknoteList.first{ $0.banknoteVariant == banknotesInATM.banknoteVariant }) else {
-//            print("Error")
-//            return remainingSum
-//        }
-        let banknoteQuantity = (remainingSum / (banknotesInATM.showBanknoteValue()))
+        if banknoteInATM.quantity > banknoteQuantity { //i cant get required for withdraval banknotes quantity earlier than this point
+            if banknoteQuantity > 0 { //same with here, but just for ommiting "x type banknote: 0" prints
+                banknoteInATM.update(quantity: newBanknoteQuantity)
+                print("Withdrawn: \(banknoteInATM.banknoteValue()): \(banknoteQuantity)")
+            }
+        } else {
+            print("Error! Not enough banknotes left for the requested sum")
+        }
         
-        let remainingSum = (remainingSum % (banknotesInATM.showBanknoteValue()))
-        print("Withdrawn: \(banknotesInATM.showBanknoteValue()): \(banknoteQuantity)")
-        // TODO
-        // get amount of banknotes available and substract from remainingSum
-        // add to the list of requiredBanknotes (look into the append method)
-        // HINT: variant + number of notes needed (maybe have to initialize new banknotes)
-        // --> TODO: list is good, but check WHERE it should be - done
-        
-
-//
-//
-//        if ((requiredBanknoteList[banknote.banknoteType] ?? 0) <= banknote.quantity){
-//            let newQuantity = banknote.quantity - (requiredBanknoteList[banknote.banknoteType] ?? 0)
-//
-//            if ((requiredBanknoteList[banknote.banknoteType] ?? 0) > 0) {
-//                banknote.update(quantity: newQuantity)
-//
-//            }
-//        } else {
-//            print("Error! Not enough banknotes left for the requested sum")
-//        }
-//
-        return remainingSum
+        return Banknote(banknoteInATM.banknoteVariant, banknoteQuantity)
     }
-        
+    
     // MARK: - Helpers
-    // Helpers should be private, if not then it should be a "Tool" or extension in a separate file
-    private func banknotesSortedDescending() -> [Banknote] {
+    private func sortedBanknotesDescending() -> [Banknote] {
         return banknoteList.sorted{ $0.banknoteVariant.rawValue > $1.banknoteVariant.rawValue }
     }
     
-    private func sortedSmallBanknotes() -> [Banknote] {
+    private func sortedSmallBanknotesDescending() -> [Banknote] {
         var smallBanknotes = banknoteList.filter{ $0.isSmallBanknote() }
         smallBanknotes.sort{ $0.banknoteVariant.rawValue > $1.banknoteVariant.rawValue }
         
         return smallBanknotes
     }
 }
-
-// banknoteList.first can return nil if the condition is not met, so it's value is optional
-// in order to continue, an actual banknote needs to be found
-// guard let attempts to assign the result of .first into a non-optional value
-// if it succeeds, we can continue, if not it goes into else statement and returns
-// this is called "Unwrapping optionals"
-// guard is used for essential elements and to early exit
-//guard let banknote = (requiredBanknoteList.first{ $0.banknoteVariant == banknote.banknoteVariant }) else {
-//    print("Error")
-//    return remainingSum
-//}
-
-//guard let couple == present else {
-//  can't have a party
-//  return
-//}
-//
-// have good party
-//
-
-    
-// if let also unwraps, but is used for a conditional execution in case certain elements are there
-// and multiple options are available and accepted.
-// NOT to be used for early exits
-//if let banknote = (requiredBanknoteList.first{ $0.banknoteVariant == banknote.banknoteVariant }) {
-//    print("Error")
-//    return remainingSum
-//} else {
-//    ///
-//}
-
-//if let motherInlaw == present {
-//  have bad party
-//} else {
-// have good party
-//}
-

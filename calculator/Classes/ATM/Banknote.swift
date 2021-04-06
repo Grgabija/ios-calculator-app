@@ -11,7 +11,7 @@ import Foundation
 class Banknote {
     
     // MARK: - Declarations
-    enum BanknoteVariant: Int, CaseIterable { // FIXME: adjust naming, now you have double Banknote. Consider separating
+    enum TypeOfBanknote: Int, CaseIterable {
         case five = 5
         case ten = 10
         case twenty = 20
@@ -21,11 +21,11 @@ class Banknote {
         case fiveHundred = 500
     }
     
-    var banknoteVariant: BanknoteVariant
+    var banknoteVariant: TypeOfBanknote
     var quantity: Int
     
     // MARK: - Methods
-    init(_ banknoteVariant: BanknoteVariant, _ quantity: Int) {
+    init(_ banknoteVariant: TypeOfBanknote, _ quantity: Int) {
         self.banknoteVariant = banknoteVariant
         self.quantity = quantity
     }
@@ -34,7 +34,7 @@ class Banknote {
         self.quantity = quantity
     }
     
-    func showBanknoteValue() -> Int {
+    func banknoteValue() -> Int { //getBanknoteValue or returnBanknoteValue ?
         return banknoteVariant.rawValue
     }
     
