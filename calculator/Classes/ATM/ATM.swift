@@ -44,6 +44,7 @@ class ATM {
             print("Error! ATM is empty")
             return
         }
+        
         var requiredBanknoteList: [Banknote] = []
         let sortedBanknotesList: [Banknote]
         var remainingSum = requestedSum
@@ -64,11 +65,11 @@ class ATM {
     // MARK: - Private
     private func updateBanknoteQuantity(_ banknote: Banknote) {
         guard let banknoteToUpdate = (self.banknoteList.first { $0.banknoteVariant == banknote.banknoteVariant }),
-              banknote.quantity > 0
-        else {
+              banknote.quantity > 0 else {
             print ("ERROR! wrong banknotes quantity")
             return
         }
+        
         banknoteToUpdate.update(quantity: banknoteToUpdate.quantity + banknote.quantity)
         print("Added to the bank account \(banknote.banknoteValue()): \(banknote.quantity)")
     }
