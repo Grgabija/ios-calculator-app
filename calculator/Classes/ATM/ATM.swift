@@ -20,7 +20,6 @@ class ATM {
     // MARK: - Public
     func refillCash() {
         banknoteList = Banknote.TypeOfBanknote.allCases.map { Banknote($0, defaultQuantity) }
-        banknoteList.forEach { $0.update(quantity: defaultQuantity) }
         print("ATM was refilled")
     }
     
@@ -31,15 +30,7 @@ class ATM {
         }
         
         for banknote in banknoteList {
-            
-            if (banknote.quantity > 0) {
-                let banknoteToUpdate = self.banknoteList.first{ $0.banknoteVariant == banknote.banknoteVariant }
-                banknoteToUpdate?.update(quantity: banknoteToUpdate?.quantity ?? 0 + banknote.quantity)
-                print("Added to the bank account \(banknote.banknoteVariant.rawValue): \(banknote.quantity)")
-            } else {
-                print ("ERROR! wrong banknotes quantity")
-                
-            }
+            updateBanknoteQuantity(banknote)
         }
     }
     
@@ -71,12 +62,23 @@ class ATM {
     }
     
     // MARK: - Private
+    private func updateBanknoteQuantity(_ banknote: Banknote) {
+        guard let banknoteToUpdate = (self.banknoteList.first { $0.banknoteVariant == banknote.banknoteVariant }),
+              banknote.quantity > 0
+        else {
+            print ("ERROR! wrong banknotes quantity")
+            return
+        }
+        banknoteToUpdate.update(quantity: banknoteToUpdate.quantity + banknote.quantity)
+        print("Added to the bank account \(banknote.banknoteValue()): \(banknote.quantity)")
+    }
+    
     private func calculateRequiredBanknote(banknoteInATM: Banknote, remainingSum: Int) -> Banknote {
         let banknoteQuantity = (remainingSum / (banknoteInATM.banknoteValue()))
         let newBanknoteQuantity = banknoteInATM.quantity - banknoteQuantity
         
         if banknoteInATM.quantity > banknoteQuantity { //i cant get required for withdraval banknotes quantity earlier than this point
-            if banknoteQuantity > 0 { //same with here, but just for ommiting "x type banknote: 0" prints
+            if banknoteQuantity > 0 { //same with here, but just for omitting "x type banknote: 0" prints
                 banknoteInATM.update(quantity: newBanknoteQuantity)
                 print("Withdrawn: \(banknoteInATM.banknoteValue()): \(banknoteQuantity)")
             }
@@ -89,12 +91,12 @@ class ATM {
     
     // MARK: - Helpers
     private func sortedBanknotesDescending() -> [Banknote] {
-        return banknoteList.sorted{ $0.banknoteVariant.rawValue > $1.banknoteVariant.rawValue }
+        return banknoteList.sorted{ $0.banknoteValue() > $1.banknoteValue() }
     }
     
     private func sortedSmallBanknotesDescending() -> [Banknote] {
         var smallBanknotes = banknoteList.filter{ $0.isSmallBanknote() }
-        smallBanknotes.sort{ $0.banknoteVariant.rawValue > $1.banknoteVariant.rawValue }
+        smallBanknotes.sort{ $0.banknoteValue() > $1.banknoteValue() }
         
         return smallBanknotes
     }

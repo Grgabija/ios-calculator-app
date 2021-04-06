@@ -32,6 +32,7 @@ class Banknote {
     
     func update(quantity: Int) {
         self.quantity = quantity
+        print(quantity)
     }
     
     func banknoteValue() -> Int { //getBanknoteValue or returnBanknoteValue ?
