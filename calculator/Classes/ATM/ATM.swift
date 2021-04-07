@@ -15,11 +15,12 @@ class ATM {
     
     // MARK: - Declarations
     var banknoteList: [Banknote] = []
+    var requiredBanknotesList: [Banknote] = []
     
     // MARK: - Methods
     // MARK: - Public
     func refillCash() {
-        banknoteList = Banknote.TypeOfBanknote.allCases.map { Banknote($0, defaultQuantity) }
+        banknoteList = Banknote.Variant.allCases.map { Banknote($0, defaultQuantity) }
         print("ATM was refilled")
     }
     
@@ -30,7 +31,12 @@ class ATM {
         }
         
         for banknote in banknoteList {
-            updateBanknoteQuantity(banknote)
+            guard let banknoteToUpdate = (banknoteList.first { $0.banknoteVariant == banknote.banknoteVariant }) else {
+                continue
+            }
+            
+            banknoteToUpdate.update(quantity: banknoteToUpdate.quantity + banknote.quantity)
+            updateBanknoteInATM(banknoteToUpdate)
         }
     }
     
@@ -45,8 +51,7 @@ class ATM {
             return
         }
         
-        var requiredBanknoteList: [Banknote] = []
-        let sortedBanknotesList: [Banknote]
+        var sortedBanknotesList: [Banknote] = []
         var remainingSum = requestedSum
         
         if requiresSmallBanknotes{
@@ -56,35 +61,57 @@ class ATM {
         }
         
         for banknote in sortedBanknotesList {
-            let banknote = calculateRequiredBanknote(banknoteInATM: banknote, remainingSum: remainingSum)
+            guard let banknoteToUpdate = (banknoteList.first { $0.banknoteVariant == banknote.banknoteVariant }),
+                  banknote.banknoteValue() <= remainingSum else {
+                continue
+            }
+            
+            let banknote = availableBanknoteToWithdraw(banknoteInATM: banknote, remainingSum: remainingSum)
             remainingSum = remainingSum - (banknote.quantity * banknote.banknoteValue())
-            requiredBanknoteList.append(banknote)
+            
+            banknoteToUpdate.update(quantity: banknoteToUpdate.quantity - banknote.quantity)
+            
+            requiredBanknotesList.append(banknoteToUpdate)
         }
+        
+        guard requiredBanknotesList.isEmpty == false else {
+            return
+        }
+        
+        updateBanknotesInATM(requiredBanknotesList)
     }
     
     // MARK: - Private
-    private func updateBanknoteQuantity(_ banknote: Banknote) {
-        guard let banknoteToUpdate = (self.banknoteList.first { $0.banknoteVariant == banknote.banknoteVariant }),
-              banknote.quantity > 0 else {
+    private func updateBanknotesInATM(_ list: [Banknote]) {
+        for banknote in banknoteList {
+            guard let requiredBanknote = (list.first { $0.banknoteVariant == banknote.banknoteVariant }) else {
+                continue
+            }
+            
+            banknote.update(quantity: requiredBanknote.quantity)
+        }
+    }
+    
+    private func updateBanknoteInATM(_ banknote: Banknote) { // FIXME different parameter
+        guard banknote.quantity >= 0 else {
             print ("ERROR! wrong banknotes quantity")
             return
         }
         
-        banknoteToUpdate.update(quantity: banknoteToUpdate.quantity + banknote.quantity)
-        print("Added to the bank account \(banknote.banknoteValue()): \(banknote.quantity)")
+        guard let banknoteToUpdate = (banknoteList.first { $0.banknoteVariant == banknote.banknoteVariant }) else {
+            return
+        }
+        
+        banknoteToUpdate.update(quantity: banknote.quantity)
     }
     
-    private func calculateRequiredBanknote(banknoteInATM: Banknote, remainingSum: Int) -> Banknote {
+    
+    private func availableBanknoteToWithdraw(banknoteInATM: Banknote, remainingSum: Int) -> Banknote {
         let banknoteQuantity = (remainingSum / (banknoteInATM.banknoteValue()))
-        let newBanknoteQuantity = banknoteInATM.quantity - banknoteQuantity
         
-        if banknoteInATM.quantity > banknoteQuantity { //i cant get required for withdraval banknotes quantity earlier than this point
-            if banknoteQuantity > 0 { //same with here, but just for omitting "x type banknote: 0" prints
-                banknoteInATM.update(quantity: newBanknoteQuantity)
-                print("Withdrawn: \(banknoteInATM.banknoteValue()): \(banknoteQuantity)")
-            }
-        } else {
+        guard banknoteInATM.quantity >= banknoteQuantity else {
             print("Error! Not enough banknotes left for the requested sum")
+            return banknoteInATM
         }
         
         return Banknote(banknoteInATM.banknoteVariant, banknoteQuantity)
