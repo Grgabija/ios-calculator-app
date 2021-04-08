@@ -23,3 +23,16 @@ import Foundation
 //
 //  Don't worry about the formatting, print it out in any form you want
 //
+
+// Dont forget the additional method to separate printing out the result of the withdrew
+
+// Follow up
+// refillCash defaults all types of Banknotes
+// refillCash only fills up 4 out 7 types
+//
+// Goal of this task
+// Actively using optional values to determine if notes are available
+// At this time if there aren't any notes available, it means quantity == 0
+// Moving on
+// if no banknote is not available, it means it's not in the array --> effectively nil
+// if a value of a note reaches zero -> remove it from the array
