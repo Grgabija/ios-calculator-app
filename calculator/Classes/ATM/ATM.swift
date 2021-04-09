@@ -138,7 +138,7 @@ class ATM {
             return
         }
         for banknote in banknoteList {
-            guard banknote.quantity >= 0 else {
+            guard banknote.quantity > 0 else {
                 continue
             }
             
