@@ -14,11 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let atm = ATM()
         atm.refillCash()
-        atm.withdraw(requestedSum: 455, requiresSmallBanknotes: false)
+        atm.withdraw(requestedSum: 455, requiresSmallBanknotes: true)
 //        atm.withdraw(requestedSum: 455, requiresSmallBanknotes: true)
-//        atm.deposit(banknotes: [Banknote(.fifty, 50), Banknote(.five, 10), Banknote(.fifty, 15)])
-        atm.withdraw(requestedSum: 255, requiresSmallBanknotes: true)
-        atm.deposit(banknotes: [Banknote(.ten, 10)])
+//        atm.deposit(banknotes: [Banknote(.fifty, 50), Banknote(.five, 0), Banknote(.fifty, 15)])
+//        atm.withdraw(requestedSum: 255, requiresSmallBanknotes: false)
+//        atm.deposit(banknotes: [Banknote(.ten, 10)])
         // Override point for customization after application launch.
         return true
     }
