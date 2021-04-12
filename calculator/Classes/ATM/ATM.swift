@@ -9,102 +9,138 @@ import Foundation
 import UIKit
 
 class ATM {
+    
+    // MARK: - Constants
+    let defaultQuantity = 20
+    
     // MARK: - Declarations
-    enum EuroBanknote: Int {
-        case fiveHundred = 500,
-             twoHundred = 200,
-             oneHundred = 100,
-             fifty = 50,
-             twenty = 20,
-             ten = 10,
-             five = 5
-    }
-    
-    private let genericBanknoteQuantity: [EuroBanknote:Int] =
-        [.fiveHundred: 20,
-         .twoHundred: 20,
-         .oneHundred: 40,
-         .fifty: 50,
-         .twenty: 100,
-         .ten: 150,
-         .five: 200
-        ]
-    
-    private var banknotesQuantity: [EuroBanknote:Int] =
-        [.fiveHundred: 0,
-         .twoHundred: 0,
-         .oneHundred: 0,
-         .fifty: 0,
-         .twenty: 0,
-         .ten: 0,
-         .five: 0
-        ]
+    var banknoteList: [Banknote] = []
     
     // MARK: - Methods
+    // MARK: - Public
     func refillCash() {
-
-        var previousBanknotesQuantity = 0
-        var quantityToRefill: [EuroBanknote:Int] = [:]
-        let sortedBanknotesDescending = sortBanknotesDescending()
-        
-        for banknote in sortedBanknotesDescending {
-            previousBanknotesQuantity = banknotesQuantity[banknote] ?? 0
-            quantityToRefill[banknote] = (genericBanknoteQuantity[banknote] ?? 0) - previousBanknotesQuantity
-            banknotesQuantity[banknote] = previousBanknotesQuantity + (quantityToRefill[banknote] ?? 0)
-            guard (quantityToRefill[banknote] ?? 0) > 0 else {
-                continue
-            }
-            print("ATM were refilled with \(quantityToRefill[banknote] ?? 0): \(banknote.rawValue)€ banknotes")
-        }
+        banknoteList = Banknote.Variant.allCases.map { Banknote($0, defaultQuantity) }
+        print("ATM was refilled")
     }
     
-    func withdraw(requestedSum: Int) {
-        guard requestedSum > 0, requestedSum % 5 == 0  else {
+    func deposit(banknotes depositedBanknoteList: [Banknote]) {
+        guard depositedBanknoteList.isEmpty == false else {
+            print ("ERROR! No banknotes inserted")
+            return
+        }
+        
+        var updatedATMBanknoteList: [Banknote] = []
+        
+        for banknote in depositedBanknoteList {
+            guard let banknoteToUpdate = (banknoteList.first { $0.banknoteVariant == banknote.banknoteVariant }) else {
+                return
+            }
+            
+            let newQuantity = banknoteToUpdate.quantity + banknote.quantity
+            let newBanknote = Banknote(banknote.banknoteVariant, newQuantity)
+            updatedATMBanknoteList.append(newBanknote)
+        }
+        
+        guard updatedATMBanknoteList.isEmpty == false else {
+            return
+        }
+        
+        updateBanknotesInATM(updatedATMBanknoteList)
+        printBanknoteList(depositedBanknoteList, isWithdrawOperation: false)
+    }
+    
+    func withdraw(requestedSum: Int, requiresSmallBanknotes: Bool) {
+        guard requestedSum > 0, requestedSum % 5 == 0 else {
             print("Error! Requested sum is not valid")
             return
         }
-        var remainingSum = requestedSum
-        let sortedBanknotesDescending = sortBanknotesDescending()
-        var requiredBanknotesQuantity: [EuroBanknote:Int] = [:]
         
-        for banknote in sortedBanknotesDescending {
-            guard banknotesQuantity[banknote] != 0, remainingSum >= banknote.rawValue, banknotesQuantity[banknote] != nil else {
+        guard banknoteList.isEmpty == false else {
+            print("Error! ATM is empty")
+            return
+        }
+        
+        var sortedBanknoteList: [Banknote] = []
+        var updatedATMBanknoteList: [Banknote] = []
+        var withdrawnBanknoteList: [Banknote] = []
+        var remainingSum = requestedSum
+        
+        if requiresSmallBanknotes{
+            sortedBanknoteList = sortedSmallBanknotesDescending()
+        } else {
+            sortedBanknoteList = sortedBanknotesDescending()
+        }
+        
+        for banknote in sortedBanknoteList {
+            guard let banknoteToUpdate = (banknoteList.first { $0.banknoteVariant == banknote.banknoteVariant }),
+                  banknote.banknoteValue() <= remainingSum else {
                 continue
             }
             
-            requiredBanknotesQuantity[banknote] = (remainingSum / (banknote.rawValue))
-            remainingSum = (requestedSum % (banknote.rawValue))
-            banknotesQuantity[banknote] = (banknotesQuantity[banknote] ?? 0) - (requiredBanknotesQuantity[banknote] ?? 0)
+            let banknote = availableBanknoteToWithdraw(banknoteInATM: banknote, remainingSum: remainingSum)
+            remainingSum = remainingSum - (banknote.quantity * banknote.banknoteValue())
+            
+            let newQuantity = banknoteToUpdate.quantity - banknote.quantity
+            let newBanknote = Banknote(banknote.banknoteVariant, newQuantity)
+            
+            updatedATMBanknoteList.append(newBanknote)
+            withdrawnBanknoteList.append(banknote)
         }
         
-        for (banknoteValue, quantity) in requiredBanknotesQuantity.sorted(by: {$0.key.rawValue > $1.key.rawValue}) {
-            print("Withdrawn: \(banknoteValue.rawValue): \(quantity)")
+        guard updatedATMBanknoteList.isEmpty == false else {
+            return
         }
-        //FIXME: delete after implementation
-        //Prefer small banknotes
+        updateBanknotesInATM(updatedATMBanknoteList)
+        printBanknoteList(withdrawnBanknoteList, isWithdrawOperation: true)
     }
     
-    private func sortBanknotesDescending() -> Array<EuroBanknote> {
-        let sortedBanknotes = banknotesQuantity.keys.sorted(by: {$0.rawValue > $1.rawValue})
-        return sortedBanknotes
-    }
-    
-    func deposit(banknotes: [EuroBanknote]) {
-        //TODO: By the logic, is this guard needed? Either should it be the error, or should it "add to bank account 0"?
-        guard banknotes.count > 0 else {
-                    print ("ERROR! wrong banknotes quantity")
-                    return
-                }
-        var insertedSum = 0
-        for banknoteNumber in banknotes {
-            guard (banknotesQuantity[banknoteNumber] ?? 0) < (genericBanknoteQuantity[banknoteNumber] ?? 0) else {
-                print("There is not enough space in ATM to deposit")
-                return
+    // MARK: - Private
+    private func updateBanknotesInATM(_ list: [Banknote]) {
+        for banknote in banknoteList {
+            guard let requiredBanknote = (list.first { $0.banknoteVariant == banknote.banknoteVariant }) else {
+                continue
             }
-            banknotesQuantity[banknoteNumber] = (banknotesQuantity[banknoteNumber] ?? 0) + 1
-            insertedSum = insertedSum + banknoteNumber.rawValue
+            
+            banknote.update(quantity: requiredBanknote.quantity)
+            print("\(banknote.banknoteVariant): \(banknote.quantity)")
         }
-        print("Added to the bank account \(insertedSum)€")
     }
+    
+    private func availableBanknoteToWithdraw(banknoteInATM: Banknote, remainingSum: Int) -> Banknote {
+        let banknoteQuantity = (remainingSum / (banknoteInATM.banknoteValue()))
+        
+        if banknoteInATM.quantity >= banknoteQuantity {
+            return Banknote(banknoteInATM.banknoteVariant, banknoteQuantity)
+        } else {
+            return Banknote(banknoteInATM.banknoteVariant, banknoteInATM.quantity)
+        }
+    }
+    
+    // MARK: - Helpers
+    private func sortedBanknotesDescending() -> [Banknote] {
+        return banknoteList.sorted{ $0.banknoteValue() > $1.banknoteValue() }
+    }
+    
+    private func sortedSmallBanknotesDescending() -> [Banknote] {
+        var smallBanknotes = banknoteList.filter{ $0.isSmallBanknote() }
+        smallBanknotes.sort{ $0.banknoteValue() > $1.banknoteValue() }
+        
+        return smallBanknotes
+    }
+    
+    private func printBanknoteList(_ banknoteList: [Banknote], isWithdrawOperation: Bool){
+        guard banknoteList.isEmpty == false else {
+            return
+        }
+        for banknote in banknoteList {
+            guard banknote.quantity > 0 else {
+                continue
+            }
+            
+            if isWithdrawOperation {
+                print("Withdrawn \(banknote.banknoteValue())€: \(banknote.quantity)")
+            } else {
+                print("Deposited \(banknote.banknoteValue())€: \(banknote.quantity)")
+            }
+        }}
 }
-
