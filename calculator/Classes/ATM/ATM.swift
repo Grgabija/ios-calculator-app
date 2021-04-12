@@ -110,10 +110,8 @@ class ATM {
         let banknoteQuantity = (remainingSum / (banknoteInATM.banknoteValue()))
         
         if banknoteInATM.quantity >= banknoteQuantity {
-            
             return Banknote(banknoteInATM.banknoteVariant, banknoteQuantity)
         } else {
-            
             return Banknote(banknoteInATM.banknoteVariant, banknoteInATM.quantity)
         }
     }
