@@ -14,12 +14,16 @@ class ATM {
     let defaultQuantity = 20
     
     // MARK: - Declarations
-    var banknoteList: [Banknote] = []
+    var banknoteList: [Banknote] = [
+        Banknote(.oneHundred,0),
+        Banknote(.fifty, 0),
+        Banknote(.ten, 0),
+        Banknote(.five, 0)]
     
     // MARK: - Methods
     // MARK: - Public
     func refillCash() {
-        banknoteList = Banknote.Variant.allCases.map { Banknote($0, defaultQuantity) }
+        banknoteList.forEach { $0.update(quantity: defaultQuantity) }
         print("ATM was refilled")
     }
     
@@ -32,20 +36,19 @@ class ATM {
         var updatedATMBanknoteList: [Banknote] = []
         
         for banknote in depositedBanknoteList {
-            guard let banknoteToUpdate = (banknoteList.first { $0.banknoteVariant == banknote.banknoteVariant }) else {
-                return
+            if let banknoteToUpdate: Banknote = banknoteList.first(where: { $0.banknoteVariant == banknote.banknoteVariant }) {
+                let newQuantity = banknoteToUpdate.quantity + banknote.quantity
+                let newBanknote = Banknote(banknote.banknoteVariant, newQuantity)
+                updatedATMBanknoteList.append(newBanknote)
+            } else {
+                updatedATMBanknoteList.append(banknote)
             }
-            
-            let newQuantity = banknoteToUpdate.quantity + banknote.quantity
-            let newBanknote = Banknote(banknote.banknoteVariant, newQuantity)
-            updatedATMBanknoteList.append(newBanknote)
         }
-        
         guard updatedATMBanknoteList.isEmpty == false else {
             return
         }
         
-        updateBanknotesInATM(updatedATMBanknoteList)
+        updateDepositedBanknotesInATM(updatedATMBanknoteList)
         printBanknoteList(depositedBanknoteList, isWithdrawOperation: false)
     }
     
@@ -71,38 +74,51 @@ class ATM {
             sortedBanknoteList = sortedBanknotesDescending()
         }
         
-        for banknote in sortedBanknoteList {
-            guard let banknoteToUpdate = (banknoteList.first { $0.banknoteVariant == banknote.banknoteVariant }),
-                  banknote.banknoteValue() <= remainingSum else {
+        for banknoteInATM in sortedBanknoteList {
+            guard banknoteInATM.banknoteValue() <= remainingSum else {
                 continue
             }
             
-            let banknote = availableBanknoteToWithdraw(banknoteInATM: banknote, remainingSum: remainingSum)
+            let banknote = availableBanknoteToWithdraw(banknoteInATM: banknoteInATM, remainingSum: remainingSum)
             remainingSum = remainingSum - (banknote.quantity * banknote.banknoteValue())
             
-            let newQuantity = banknoteToUpdate.quantity - banknote.quantity
+            let newQuantity = banknoteInATM.quantity - banknote.quantity
             let newBanknote = Banknote(banknote.banknoteVariant, newQuantity)
             
             updatedATMBanknoteList.append(newBanknote)
             withdrawnBanknoteList.append(banknote)
         }
         
-        guard updatedATMBanknoteList.isEmpty == false else {
+        guard updatedATMBanknoteList.isEmpty == false, remainingSum == 0 else {
             return
         }
-        updateBanknotesInATM(updatedATMBanknoteList)
+        
+        updateWithdrawnBanknotesInATM(updatedATMBanknoteList)
         printBanknoteList(withdrawnBanknoteList, isWithdrawOperation: true)
     }
     
     // MARK: - Private
-    private func updateBanknotesInATM(_ list: [Banknote]) {
-        for banknote in banknoteList {
-            guard let requiredBanknote = (list.first { $0.banknoteVariant == banknote.banknoteVariant }) else {
-                continue
+    private func updateDepositedBanknotesInATM(_ list: [Banknote]) {
+        for banknote in list {
+            if let requiredBanknote: Banknote = banknoteList.first(where: { $0.banknoteVariant == banknote.banknoteVariant }) {
+                requiredBanknote.update(quantity: banknote.quantity)
+            } else {
+                banknoteList.append(banknote)
+            }
+        }
+    }
+    
+    private func updateWithdrawnBanknotesInATM(_ list: [Banknote]) {
+        for banknote in list {
+            guard let requiredBanknote: Banknote = banknoteList.first(where: { $0.banknoteVariant == banknote.banknoteVariant }) else {
+                return
             }
             
-            banknote.update(quantity: requiredBanknote.quantity)
-            print("\(banknote.banknoteVariant): \(banknote.quantity)")
+            if banknote.quantity == 0 {
+                banknoteList.removeAll(where: {$0.banknoteVariant == banknote.banknoteVariant} )
+            } else {
+                requiredBanknote.update(quantity: banknote.quantity)
+            }
         }
     }
     
@@ -128,7 +144,7 @@ class ATM {
         return smallBanknotes
     }
     
-    private func printBanknoteList(_ banknoteList: [Banknote], isWithdrawOperation: Bool){
+    private func printBanknoteList(_ banknoteList: [Banknote], isWithdrawOperation: Bool) {
         guard banknoteList.isEmpty == false else {
             return
         }
