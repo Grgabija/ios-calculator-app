@@ -74,6 +74,10 @@ class ATM {
             sortedBanknoteList = sortedBanknotesDescending()
         }
         
+        guard sortedBanknoteList.isEmpty == false else {
+            return
+        }
+        
         for banknoteInATM in sortedBanknoteList {
             guard banknoteInATM.banknoteValue() <= remainingSum else {
                 continue
@@ -102,7 +106,15 @@ class ATM {
     
     // MARK: - Private
     private func updateBanknotesInATM(_ list: [Banknote]) {
+        guard list.isEmpty == false else {
+            return
+        }
+        
         for banknote in list {
+            guard banknote.quantity >= 0 else {
+                return
+            }
+            
             guard let requiredBanknote: Banknote = banknoteList.first(where: { $0.banknoteVariant == banknote.banknoteVariant }) else {
                 banknoteList.append(banknote)
                 return
@@ -117,6 +129,10 @@ class ATM {
     }
     
     private func availableBanknoteToWithdraw(banknoteInATM: Banknote, remainingSum: Int) -> Banknote? {
+        guard remainingSum >= 0, banknoteInATM.quantity >= 0 else {
+            return nil
+        }
+        
         let banknoteQuantity = (remainingSum / (banknoteInATM.banknoteValue()))
         
         if banknoteQuantity == 0 {
