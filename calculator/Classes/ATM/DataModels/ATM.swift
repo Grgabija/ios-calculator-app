@@ -11,7 +11,7 @@ import UIKit
 class ATM {
     
     // MARK: - Constants
-    let defaultQuantity = 20
+    let defaultQuantity = 2
     
     // MARK: - Declarations
     var banknoteList: [Banknote] = [
@@ -36,7 +36,7 @@ class ATM {
         var updatedATMBanknoteList: [Banknote] = []
         
         for banknote in depositedBanknoteList {
-            if let banknoteToUpdate: Banknote = banknoteList.first(where: { $0.banknoteVariant == banknote.banknoteVariant }) {
+            if let banknoteToUpdate: Banknote = banknoteList.first(where: { $0 == banknote }) {
                 let newQuantity = banknoteToUpdate.quantity + banknote.quantity
                 let newBanknote = Banknote(banknote.banknoteVariant, newQuantity)
                 updatedATMBanknoteList.append(newBanknote)
@@ -48,7 +48,7 @@ class ATM {
             return
         }
         
-        updateDepositedBanknotesInATM(updatedATMBanknoteList)
+        updateBanknotesInATM(updatedATMBanknoteList)
         printBanknoteList(depositedBanknoteList, isWithdrawOperation: false)
     }
     
@@ -79,7 +79,10 @@ class ATM {
                 continue
             }
             
-            let banknote = availableBanknoteToWithdraw(banknoteInATM: banknoteInATM, remainingSum: remainingSum)
+            guard let banknote = availableBanknoteToWithdraw(banknoteInATM: banknoteInATM, remainingSum: remainingSum) else {
+                continue
+            }
+            
             remainingSum = remainingSum - (banknote.quantity * banknote.banknoteValue())
             
             let newQuantity = banknoteInATM.quantity - banknote.quantity
@@ -93,37 +96,40 @@ class ATM {
             return
         }
         
-        updateWithdrawnBanknotesInATM(updatedATMBanknoteList)
+        updateBanknotesInATM(updatedATMBanknoteList)
         printBanknoteList(withdrawnBanknoteList, isWithdrawOperation: true)
     }
     
     // MARK: - Private
-    private func updateDepositedBanknotesInATM(_ list: [Banknote]) {
+    private func updateBanknotesInATM(_ list: [Banknote]) {
+        guard list.isEmpty == false else {
+            return
+        }
+        
         for banknote in list {
-            if let requiredBanknote: Banknote = banknoteList.first(where: { $0.banknoteVariant == banknote.banknoteVariant }) {
+            guard banknote.quantity >= 0 else {
+                return
+            }
+            
+            if let requiredBanknote: Banknote = (banknoteList.first { $0 == banknote }) {
                 requiredBanknote.update(quantity: banknote.quantity)
+                removeIfNecessary(banknote)
             } else {
                 banknoteList.append(banknote)
             }
         }
     }
     
-    private func updateWithdrawnBanknotesInATM(_ list: [Banknote]) {
-        for banknote in list {
-            guard let requiredBanknote: Banknote = banknoteList.first(where: { $0.banknoteVariant == banknote.banknoteVariant }) else {
-                return
-            }
-            
-            if banknote.quantity == 0 {
-                banknoteList.removeAll(where: {$0.banknoteVariant == banknote.banknoteVariant} )
-            } else {
-                requiredBanknote.update(quantity: banknote.quantity)
-            }
+    private func availableBanknoteToWithdraw(banknoteInATM: Banknote, remainingSum: Int) -> Banknote? {
+        guard remainingSum >= 0, banknoteInATM.quantity >= 0 else {
+            return nil
         }
-    }
-    
-    private func availableBanknoteToWithdraw(banknoteInATM: Banknote, remainingSum: Int) -> Banknote {
+        
         let banknoteQuantity = (remainingSum / (banknoteInATM.banknoteValue()))
+        
+        guard banknoteQuantity != 0 else {
+            return nil
+        }
         
         if banknoteInATM.quantity >= banknoteQuantity {
             return Banknote(banknoteInATM.banknoteVariant, banknoteQuantity)
@@ -158,5 +164,14 @@ class ATM {
             } else {
                 print("Deposited \(banknote.banknoteValue())€: \(banknote.quantity)")
             }
-        }}
+        }
+    }
+    
+    private func removeIfNecessary(_ banknote: Banknote) {
+        if banknote.quantity == 0 {
+            if let index = banknoteList.firstIndex(of: banknote) {
+                banknoteList.remove(at: index)
+            }
+        }
+    }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 
-class Banknote {
+class Banknote: Equatable {
     
     // MARK: - Declarations
     enum Variant: Int, CaseIterable {
@@ -45,5 +45,9 @@ class Banknote {
         case .five, .ten, .twenty:
             return true
         }
+    }
+    
+    static func == (lhs: Banknote, rhs: Banknote) -> Bool {
+        return lhs.banknoteVariant == rhs.banknoteVariant
     }
 }
