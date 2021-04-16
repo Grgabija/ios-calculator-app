@@ -36,7 +36,7 @@ class ATM {
         var updatedATMBanknoteList: [Banknote] = []
         
         for banknote in depositedBanknoteList {
-            if let banknoteToUpdate: Banknote = banknoteList.first(where: { $0 == banknote }) {
+            if let banknoteToUpdate: Banknote = banknoteList.banknote(object: banknote) {
                 let newQuantity = banknoteToUpdate.quantity + banknote.quantity
                 let newBanknote = Banknote(banknote.banknoteVariant, newQuantity)
                 updatedATMBanknoteList.append(newBanknote)
@@ -111,7 +111,7 @@ class ATM {
                 return
             }
             
-            if let requiredBanknote: Banknote = (banknoteList.first { $0 == banknote }) {
+            if let requiredBanknote: Banknote = (banknoteList.banknote(object: banknote)) {
                 requiredBanknote.update(quantity: banknote.quantity)
                 removeIfNecessary(banknote)
             } else {
@@ -169,9 +169,7 @@ class ATM {
     
     private func removeIfNecessary(_ banknote: Banknote) {
         if banknote.quantity == 0 {
-            if let index = banknoteList.firstIndex(of: banknote) {
-                banknoteList.remove(at: index)
-            }
+            banknoteList.remove(object: banknote)
         }
     }
 }
