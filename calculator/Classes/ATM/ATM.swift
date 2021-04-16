@@ -11,7 +11,7 @@ import UIKit
 class ATM {
     
     // MARK: - Constants
-    let defaultQuantity = 20
+    let defaultQuantity = 2
     
     // MARK: - Declarations
     var banknoteList: [Banknote] = [
@@ -36,7 +36,7 @@ class ATM {
         var updatedATMBanknoteList: [Banknote] = []
         
         for banknote in depositedBanknoteList {
-            if let banknoteToUpdate: Banknote = banknoteList.first(where: { $0.banknoteVariant == banknote.banknoteVariant }) {
+            if let banknoteToUpdate: Banknote = banknoteList.first(where: { $0 == banknote }) {
                 let newQuantity = banknoteToUpdate.quantity + banknote.quantity
                 let newBanknote = Banknote(banknote.banknoteVariant, newQuantity)
                 updatedATMBanknoteList.append(newBanknote)
@@ -72,10 +72,6 @@ class ATM {
             sortedBanknoteList = sortedSmallBanknotesDescending()
         } else {
             sortedBanknoteList = sortedBanknotesDescending()
-        }
-        
-        guard sortedBanknoteList.isEmpty == false else {
-            return
         }
         
         for banknoteInATM in sortedBanknoteList {
@@ -115,15 +111,11 @@ class ATM {
                 return
             }
             
-            guard let requiredBanknote: Banknote = banknoteList.first(where: { $0.banknoteVariant == banknote.banknoteVariant }) else {
-                banknoteList.append(banknote)
-                return
-            }
-            
-            if banknote.quantity == 0 {
-                banknoteList.removeAll(where: {$0.banknoteVariant == banknote.banknoteVariant} )
-            } else {
+            if let requiredBanknote: Banknote = (banknoteList.first { $0 == banknote }) {
                 requiredBanknote.update(quantity: banknote.quantity)
+                removeIfNecessary(banknote)
+            } else {
+                banknoteList.append(banknote)
             }
         }
     }
@@ -135,9 +127,11 @@ class ATM {
         
         let banknoteQuantity = (remainingSum / (banknoteInATM.banknoteValue()))
         
-        if banknoteQuantity == 0 {
+        guard banknoteQuantity != 0 else {
             return nil
-        } else if banknoteInATM.quantity >= banknoteQuantity {
+        }
+        
+        if banknoteInATM.quantity >= banknoteQuantity {
             return Banknote(banknoteInATM.banknoteVariant, banknoteQuantity)
         } else {
             return Banknote(banknoteInATM.banknoteVariant, banknoteInATM.quantity)
@@ -170,5 +164,14 @@ class ATM {
             } else {
                 print("Deposited \(banknote.banknoteValue())€: \(banknote.quantity)")
             }
-        }}
+        }
+    }
+    
+    private func removeIfNecessary(_ banknote: Banknote) {
+        if banknote.quantity == 0 {
+            if let index = banknoteList.firstIndex(of: banknote) {
+                banknoteList.remove(at: index)
+            }
+        }
+    }
 }
