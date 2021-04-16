@@ -79,7 +79,10 @@ class ATM {
                 continue
             }
             
-            let banknote = availableBanknoteToWithdraw(banknoteInATM: banknoteInATM, remainingSum: remainingSum)
+            guard let banknote = availableBanknoteToWithdraw(banknoteInATM: banknoteInATM, remainingSum: remainingSum) else {
+                continue
+            }
+            
             remainingSum = remainingSum - (banknote.quantity * banknote.banknoteValue())
             
             let newQuantity = banknoteInATM.quantity - banknote.quantity
@@ -122,10 +125,12 @@ class ATM {
         }
     }
     
-    private func availableBanknoteToWithdraw(banknoteInATM: Banknote, remainingSum: Int) -> Banknote {
+    private func availableBanknoteToWithdraw(banknoteInATM: Banknote, remainingSum: Int) -> Banknote? {
         let banknoteQuantity = (remainingSum / (banknoteInATM.banknoteValue()))
         
-        if banknoteInATM.quantity >= banknoteQuantity {
+        if banknoteQuantity == 0 {
+            return nil
+        } else if banknoteInATM.quantity >= banknoteQuantity {
             return Banknote(banknoteInATM.banknoteVariant, banknoteQuantity)
         } else {
             return Banknote(banknoteInATM.banknoteVariant, banknoteInATM.quantity)
