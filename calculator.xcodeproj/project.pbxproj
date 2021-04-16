@@ -82,8 +82,9 @@
 		9678F5E426087C94008A1FEC /* ATM */ = {
 			isa = PBXGroup;
 			children = (
-				9678F5E526087CAE008A1FEC /* ATM.swift */,
-				96C049892611E84D00962080 /* Banknote.swift */,
+				96B4385C2629C532002394E8 /* ViewControllers */,
+				96B4385B2629C528002394E8 /* DataEntities */,
+				96B4385A2629C507002394E8 /* DataModels */,
 			);
 			path = ATM;
 			sourceTree = "<group>";
@@ -112,6 +113,29 @@
 				96B1DF3B25FF3A5600F9FF61 /* Info.plist */,
 			);
 			path = calculator;
+			sourceTree = "<group>";
+		};
+		96B4385A2629C507002394E8 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				9678F5E526087CAE008A1FEC /* ATM.swift */,
+			);
+			path = DataModels;
+			sourceTree = "<group>";
+		};
+		96B4385B2629C528002394E8 /* DataEntities */ = {
+			isa = PBXGroup;
+			children = (
+				96C049892611E84D00962080 /* Banknote.swift */,
+			);
+			path = DataEntities;
+			sourceTree = "<group>";
+		};
+		96B4385C2629C532002394E8 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
