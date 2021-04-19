@@ -1,5 +1,5 @@
 //
-//  ATM.swift
+//  ATM+DataModel.swift
 //  calculator
 //
 //  Created by Gabija on 2021-03-22.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ATM {
+class ATMDataModel {
     
     // MARK: - Constants
     let defaultQuantity = 2
@@ -36,7 +36,7 @@ class ATM {
         var updatedATMBanknoteList: [Banknote] = []
         
         for banknote in depositedBanknoteList {
-            if let banknoteToUpdate: Banknote = banknoteList.banknote(object: banknote) {
+            if let banknoteToUpdate: Banknote = banknoteList.banknote(banknote) {
                 let newQuantity = banknoteToUpdate.quantity + banknote.quantity
                 let newBanknote = Banknote(banknote.banknoteVariant, newQuantity)
                 updatedATMBanknoteList.append(newBanknote)
@@ -111,7 +111,7 @@ class ATM {
                 return
             }
             
-            if let requiredBanknote: Banknote = (banknoteList.banknote(object: banknote)) {
+            if let requiredBanknote: Banknote = (banknoteList.banknote(banknote)) {
                 requiredBanknote.update(quantity: banknote.quantity)
                 removeIfNecessary(banknote)
             } else {
@@ -169,7 +169,7 @@ class ATM {
     
     private func removeIfNecessary(_ banknote: Banknote) {
         if banknote.quantity == 0 {
-            banknoteList.remove(object: banknote)
+            banknoteList.remove(banknote)
         }
     }
 }

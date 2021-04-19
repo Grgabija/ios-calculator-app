@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		84C541542603526E00AEBB49 /* Calculator+ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C541532603526E00AEBB49 /* Calculator+ActionType.swift */; };
-		9678F5E626087CAE008A1FEC /* ATM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678F5E526087CAE008A1FEC /* ATM.swift */; };
+		9678F5E626087CAE008A1FEC /* ATM+DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678F5E526087CAE008A1FEC /* ATM+DataModel.swift */; };
 		967AE65E262D84FB003AFE5D /* ATMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967AE65D262D84FB003AFE5D /* ATMViewController.swift */; };
 		968529DA25FF882F001994D7 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968529D925FF882F001994D7 /* Calculator.swift */; };
 		96B1DF2E25FF3A5400F9FF61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B1DF2D25FF3A5400F9FF61 /* AppDelegate.swift */; };
@@ -24,7 +24,7 @@
 
 /* Begin PBXFileReference section */
 		84C541532603526E00AEBB49 /* Calculator+ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calculator+ActionType.swift"; sourceTree = "<group>"; };
-		9678F5E526087CAE008A1FEC /* ATM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATM.swift; sourceTree = "<group>"; };
+		9678F5E526087CAE008A1FEC /* ATM+DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATM+DataModel.swift"; sourceTree = "<group>"; };
 		967AE65D262D84FB003AFE5D /* ATMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMViewController.swift; sourceTree = "<group>"; };
 		968529D925FF882F001994D7 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		96B1DF2A25FF3A5400F9FF61 /* calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,7 +123,7 @@
 		96B4385A2629C507002394E8 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				9678F5E526087CAE008A1FEC /* ATM.swift */,
+				9678F5E526087CAE008A1FEC /* ATM+DataModel.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -230,7 +230,7 @@
 				967AE65E262D84FB003AFE5D /* ATMViewController.swift in Sources */,
 				96B438612629CD3A002394E8 /* Array+Tools.swift in Sources */,
 				B293042B2604D0DA00BB3AF5 /* Assignment.swift in Sources */,
-				9678F5E626087CAE008A1FEC /* ATM.swift in Sources */,
+				9678F5E626087CAE008A1FEC /* ATM+DataModel.swift in Sources */,
 				968529DA25FF882F001994D7 /* Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
