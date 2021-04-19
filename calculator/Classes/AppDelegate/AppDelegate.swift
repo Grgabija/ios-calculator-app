@@ -12,16 +12,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window : UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let atm = ATM()
-        atm.refillCash()
-        atm.withdraw(requestedSum: 30, requiresSmallBanknotes: false)
-//        atm.withdraw(requestedSum: 455, requiresSmallBanknotes: false)
-//        atm.deposit(banknotes: [Banknote(.fifty, 51), Banknote(.twenty, 1), Banknote(.twoHundred, 15)])
-//        atm.withdraw(requestedSum: 40, requiresSmallBanknotes: true)
-//        atm.deposit(banknotes: [Banknote(.twoHundred, 10)])
-//        atm.withdraw(requestedSum: 255, requiresSmallBanknotes: false)
-        // Override point for customization after application launch.
-//        atm.refillCash()
         return true
     }
     

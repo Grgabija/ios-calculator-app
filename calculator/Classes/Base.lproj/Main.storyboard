@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vib-oD-BQM">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -14,20 +14,20 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="CalculatorViewController" customModule="calculator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAH-YX-IYq">
-                                <rect key="frame" x="10" y="10" width="394" height="231"/>
+                                <rect key="frame" x="10" y="54" width="370" height="261"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KBn-xd-hdY">
-                                <rect key="frame" x="10" y="261" width="394" height="89"/>
+                                <rect key="frame" x="10" y="335" width="370" height="89"/>
                                 <subviews>
                                     <button opaque="NO" tag="11" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2SQ-Mg-sda">
-                                        <rect key="frame" x="0.0" y="0.0" width="194.66666666666666" height="89"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="182.66666666666666" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -39,7 +39,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="17" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0UJ-8F-8mQ">
-                                        <rect key="frame" x="199.66666666666666" y="0.0" width="94.666666666666657" height="89"/>
+                                        <rect key="frame" x="187.66666666666666" y="0.0" width="88.666666666666657" height="89"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -51,7 +51,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="12" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzE-OI-WMw">
-                                        <rect key="frame" x="299.33333333333331" y="0.0" width="94.666666666666686" height="89"/>
+                                        <rect key="frame" x="281.33333333333331" y="0.0" width="88.666666666666686" height="89"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -68,10 +68,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YbS-Cz-KCw">
-                                <rect key="frame" x="10" y="355" width="394" height="89"/>
+                                <rect key="frame" x="10" y="429" width="370" height="89"/>
                                 <subviews>
                                     <button opaque="NO" tag="8" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LcU-H5-92O">
-                                        <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="89"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -83,7 +83,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="9" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwe-5U-GAj">
-                                        <rect key="frame" x="99.666666666666686" y="0.0" width="95" height="89"/>
+                                        <rect key="frame" x="93.666666666666686" y="0.0" width="89" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -95,7 +95,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="10" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOg-Xz-tbh">
-                                        <rect key="frame" x="199.66666666666666" y="0.0" width="94.666666666666657" height="89"/>
+                                        <rect key="frame" x="187.66666666666666" y="0.0" width="88.666666666666657" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -107,7 +107,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="13" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cQ-dt-6va">
-                                        <rect key="frame" x="299.33333333333331" y="0.0" width="94.666666666666686" height="89"/>
+                                        <rect key="frame" x="281.33333333333331" y="0.0" width="88.666666666666686" height="89"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -124,10 +124,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="lay-VB-Vjc">
-                                <rect key="frame" x="10" y="449" width="394" height="89"/>
+                                <rect key="frame" x="10" y="523" width="370" height="89"/>
                                 <subviews>
                                     <button opaque="NO" tag="5" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0AX-24-Wlu">
-                                        <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="89"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -139,7 +139,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="6" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h1K-Sh-saQ">
-                                        <rect key="frame" x="99.666666666666686" y="0.0" width="95" height="89"/>
+                                        <rect key="frame" x="93.666666666666686" y="0.0" width="89" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -151,7 +151,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="7" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tmt-MW-MtZ">
-                                        <rect key="frame" x="199.66666666666666" y="0.0" width="94.666666666666657" height="89"/>
+                                        <rect key="frame" x="187.66666666666666" y="0.0" width="88.666666666666657" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -163,7 +163,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="14" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWH-DG-2Zp">
-                                        <rect key="frame" x="299.33333333333331" y="0.0" width="94.666666666666686" height="89"/>
+                                        <rect key="frame" x="281.33333333333331" y="0.0" width="88.666666666666686" height="89"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemOrangeColor"/>
@@ -180,10 +180,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6iR-9A-wzs">
-                                <rect key="frame" x="10" y="543" width="294.33333333333331" height="89"/>
+                                <rect key="frame" x="10" y="617" width="276.33333333333331" height="89"/>
                                 <subviews>
                                     <button opaque="NO" tag="2" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywu-iw-LU9">
-                                        <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="89"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -195,7 +195,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYL-1x-mug">
-                                        <rect key="frame" x="99.666666666666686" y="0.0" width="95" height="89"/>
+                                        <rect key="frame" x="93.666666666666686" y="0.0" width="89" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -207,7 +207,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0a-SX-Ao7">
-                                        <rect key="frame" x="199.66666666666666" y="0.0" width="94.666666666666657" height="89"/>
+                                        <rect key="frame" x="187.66666666666666" y="0.0" width="88.666666666666657" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -224,10 +224,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="PYM-Ak-DXd">
-                                <rect key="frame" x="10" y="637" width="294.33333333333331" height="89"/>
+                                <rect key="frame" x="10" y="711" width="276.33333333333331" height="89"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbu-x4-YCU">
-                                        <rect key="frame" x="0.0" y="0.0" width="194.66666666666666" height="89"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="182.66666666666666" height="89"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemGray3Color"/>
@@ -239,7 +239,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="16" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yP-ct-TSI">
-                                        <rect key="frame" x="199.66666666666666" y="0.0" width="94.666666666666657" height="89"/>
+                                        <rect key="frame" x="187.66666666666666" y="0.0" width="88.666666666666657" height="89"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="tintColor" systemColor="systemOrangeColor"/>
@@ -256,7 +256,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" tag="15" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZC-gl-aNZ">
-                                <rect key="frame" x="309.33333333333331" y="543" width="94.666666666666686" height="183"/>
+                                <rect key="frame" x="291.33333333333331" y="617" width="88.666666666666686" height="183"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                 <color key="tintColor" systemColor="systemOrangeColor"/>
@@ -305,7 +305,66 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="14.492753623188406" y="88.043478260869577"/>
+            <point key="canvasLocation" x="1349" y="87"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="0i5-LB-ypm">
+            <objects>
+                <viewController id="vib-oD-BQM" customClass="ATMViewController" customModule="calculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hou-28-vg1">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tXb-B2-sPF">
+                                <rect key="frame" x="150" y="344" width="100" height="130"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hE-Nf-QVi">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="hur-0l-kqT"/>
+                                        </constraints>
+                                        <state key="normal" title="Refill">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="refill:" destination="vib-oD-BQM" eventType="touchUpInside" id="e5f-Bt-lYn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ba-0G-8dA">
+                                        <rect key="frame" x="0.0" y="50" width="100" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                        <state key="normal" title="Deposit">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deposit:" destination="vib-oD-BQM" eventType="touchUpInside" id="RID-9x-1Tn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhG-Eo-Khv">
+                                        <rect key="frame" x="0.0" y="100" width="100" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                        <state key="normal" title="Withdraw">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="withdraw:" destination="vib-oD-BQM" eventType="touchUpInside" id="h2b-Vu-BPA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Llg-UO-vmk"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tXb-B2-sPF" firstAttribute="top" secondItem="Llg-UO-vmk" secondAttribute="top" constant="300" id="t3a-Sv-fVL"/>
+                            <constraint firstItem="tXb-B2-sPF" firstAttribute="leading" secondItem="Llg-UO-vmk" secondAttribute="leading" constant="150" id="xt0-1p-RJv"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8k6-QL-mwz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="672.46376811594212" y="87.228260869565219"/>
         </scene>
     </scenes>
     <resources>
