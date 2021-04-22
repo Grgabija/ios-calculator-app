@@ -11,10 +11,15 @@ class ATMViewController: UIViewController {
     
     // MARK: - Declarations
     private let atmDataModel = ATMDataModel()
+    private let kDefaultQuantity = 2
     
     // MARK: - Methods
     @IBAction func refill(_ sender: UIButton) {
-        atmDataModel.refillCash(refillBanknoteList: [Banknote(.fifty, 0)])
+        atmDataModel.refillCash(refillBanknoteList: [Banknote(.oneHundred, kDefaultQuantity),
+                                                     Banknote(.fifty, kDefaultQuantity),
+                                                     Banknote(.ten, kDefaultQuantity),
+                                                     Banknote(.five, kDefaultQuantity)]
+        )
     }
     
     @IBAction func deposit(_ sender: UIButton) {

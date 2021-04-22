@@ -10,22 +10,18 @@ import UIKit
 
 class ATMDataModel {
     
-    // MARK: - Constants
-    let kDefaultQuantity = 2
-    
     // MARK: - Declarations
     var banknoteList: [Banknote] = []
     
     // MARK: - Methods
     // MARK: - Public
     func refillCash(refillBanknoteList: [Banknote]) {
-        guard refillBanknoteList.isEmpty == false,
-              banknoteList != refillBanknoteList else {
+        guard refillBanknoteList.isEmpty == false else {
             return
         }
         
+        banknoteList.removeAll()
         banknoteList.append(contentsOf: refillBanknoteList)
-        banknoteList.forEach { $0.update(quantity: kDefaultQuantity) }
         print("ATM was refilled")
     }
     
