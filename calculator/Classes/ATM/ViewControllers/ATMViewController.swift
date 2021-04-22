@@ -9,9 +9,11 @@ import UIKit
 
 class ATMViewController: UIViewController {
     
+    // MARK: - Constants
+    private let kDefaultQuantity = 2
+    
     // MARK: - Declarations
     private let atmDataModel = ATMDataModel()
-    private let kDefaultQuantity = 2
     
     // MARK: - Methods
     @IBAction func refill(_ sender: UIButton) {
