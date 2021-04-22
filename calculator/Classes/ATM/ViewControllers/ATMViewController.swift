@@ -14,7 +14,7 @@ class ATMViewController: UIViewController {
     
     // MARK: - Methods
     @IBAction func refill(_ sender: UIButton) {
-        atmDataModel.refillCash()
+        atmDataModel.refillCash(refillBanknoteList: [Banknote(.fifty, 0)])
     }
     
     @IBAction func deposit(_ sender: UIButton) {
@@ -22,7 +22,7 @@ class ATMViewController: UIViewController {
     }
     
     @IBAction func withdraw(_ sender: UIButton) {
-        atmDataModel.withdraw(requestedSum: 430, requiresSmallBanknotes: false)
+        atmDataModel.withdraw(requestedSum: 100, requiresSmallBanknotes: false)
     }
     
 }

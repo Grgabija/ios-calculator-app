@@ -11,19 +11,21 @@ import UIKit
 class ATMDataModel {
     
     // MARK: - Constants
-    let defaultQuantity = 2
+    let kDefaultQuantity = 2
     
     // MARK: - Declarations
-    var banknoteList: [Banknote] = [
-        Banknote(.oneHundred,0),
-        Banknote(.fifty, 0),
-        Banknote(.ten, 0),
-        Banknote(.five, 0)]
+    var banknoteList: [Banknote] = []
     
     // MARK: - Methods
     // MARK: - Public
-    func refillCash() {
-        banknoteList.forEach { $0.update(quantity: defaultQuantity) }
+    func refillCash(refillBanknoteList: [Banknote]) {
+        guard refillBanknoteList.isEmpty == false,
+              banknoteList != refillBanknoteList else {
+            return
+        }
+        
+        banknoteList.append(contentsOf: refillBanknoteList)
+        banknoteList.forEach { $0.update(quantity: kDefaultQuantity) }
         print("ATM was refilled")
     }
     
