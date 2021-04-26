@@ -1,5 +1,5 @@
 //
-//  Calculator.swift
+//  Calculator+DataModel.swift
 //  calculator
 //
 //  Created by Gabija on 2021-03-15.
