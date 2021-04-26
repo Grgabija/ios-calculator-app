@@ -17,19 +17,20 @@ class ATMViewController: UIViewController {
     
     // MARK: - Methods
     @IBAction func refill(_ sender: UIButton) {
-        atmDataModel.refillCash(refillBanknoteList: [Banknote(.oneHundred, kDefaultQuantity),
-                                                     Banknote(.fifty, kDefaultQuantity),
-                                                     Banknote(.ten, kDefaultQuantity),
-                                                     Banknote(.five, kDefaultQuantity)]
+        atmDataModel.refillCash(refillBanknoteList: [Banknote(.oneHundred, quantity: kDefaultQuantity),
+                                                     Banknote(.fifty, quantity: kDefaultQuantity),
+                                                     Banknote(.ten, quantity: kDefaultQuantity),
+//                                                     Banknote(.five, quantity: kDefaultQuantity)
+        ]
         )
     }
     
     @IBAction func deposit(_ sender: UIButton) {
-        atmDataModel.deposit(banknotes: [Banknote(.fifty, 51), Banknote(.twenty, 1), Banknote(.twoHundred, 15)])
+        atmDataModel.deposit(banknotes: [Banknote(.fifty, quantity: 51), Banknote(.twenty, quantity: 1), Banknote(.twoHundred, quantity: 15)])
     }
     
     @IBAction func withdraw(_ sender: UIButton) {
-        atmDataModel.withdraw(requestedSum: 100, requiresSmallBanknotes: false)
+        atmDataModel.withdraw(requestedSum: 10, requiresSmallBanknotes: true)
     }
     
 }
