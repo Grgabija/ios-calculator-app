@@ -10,20 +10,18 @@ import UIKit
 
 class ATMDataModel {
     
-    // MARK: - Constants
-    let defaultQuantity = 2
-    
     // MARK: - Declarations
-    var banknoteList: [Banknote] = [
-        Banknote(.oneHundred,0),
-        Banknote(.fifty, 0),
-        Banknote(.ten, 0),
-        Banknote(.five, 0)]
+    var banknoteList: [Banknote] = []
     
     // MARK: - Methods
     // MARK: - Public
-    func refillCash() {
-        banknoteList.forEach { $0.update(quantity: defaultQuantity) }
+    func refillCash(refillBanknoteList: [Banknote]) {
+        guard refillBanknoteList.isEmpty == false else {
+            return
+        }
+        
+        banknoteList.removeAll()
+        banknoteList.append(contentsOf: refillBanknoteList)
         print("ATM was refilled")
     }
     
@@ -38,7 +36,7 @@ class ATMDataModel {
         for banknote in depositedBanknoteList {
             if let banknoteToUpdate: Banknote = banknoteList.banknote(banknote) {
                 let newQuantity = banknoteToUpdate.quantity + banknote.quantity
-                let newBanknote = Banknote(banknote.banknoteVariant, newQuantity)
+                let newBanknote = Banknote(banknote.banknoteVariant, quantity: newQuantity)
                 updatedATMBanknoteList.append(newBanknote)
             } else {
                 updatedATMBanknoteList.append(banknote)
@@ -48,8 +46,8 @@ class ATMDataModel {
             return
         }
         
-        updateBanknotesInATM(updatedATMBanknoteList)
-        printBanknoteList(depositedBanknoteList, isWithdrawOperation: false)
+        updateBanknotesInATM(list: updatedATMBanknoteList)
+        printBanknoteList(banknoteList: depositedBanknoteList, isWithdrawOperation: false)
     }
     
     func withdraw(requestedSum: Int, requiresSmallBanknotes: Bool) {
@@ -68,8 +66,14 @@ class ATMDataModel {
         var withdrawnBanknoteList: [Banknote] = []
         var remainingSum = requestedSum
         
-        if requiresSmallBanknotes{
+        if requiresSmallBanknotes {
             sortedBanknoteList = sortedSmallBanknotesDescending()
+            let smallBanknoteSum = sumSmallBanknotes(sortedBanknoteList)
+            
+            if (smallBanknoteSum < requestedSum) || (sortedBanknoteList.isEmpty) {
+                sortedBanknoteList = sortedBiggerBanknotesAscending()
+            }
+            
         } else {
             sortedBanknoteList = sortedBanknotesDescending()
         }
@@ -86,22 +90,23 @@ class ATMDataModel {
             remainingSum = remainingSum - (banknote.quantity * banknote.banknoteValue())
             
             let newQuantity = banknoteInATM.quantity - banknote.quantity
-            let newBanknote = Banknote(banknote.banknoteVariant, newQuantity)
+            let newBanknote = Banknote(banknote.banknoteVariant, quantity: newQuantity)
             
             updatedATMBanknoteList.append(newBanknote)
             withdrawnBanknoteList.append(banknote)
         }
-        
+        updatedATMBanknoteList.forEach{ print("\($0.banknoteVariant): \($0.quantity)") }
+
         guard updatedATMBanknoteList.isEmpty == false, remainingSum == 0 else {
             return
         }
         
-        updateBanknotesInATM(updatedATMBanknoteList)
-        printBanknoteList(withdrawnBanknoteList, isWithdrawOperation: true)
+        updateBanknotesInATM(list: updatedATMBanknoteList)
+        printBanknoteList(banknoteList: withdrawnBanknoteList, isWithdrawOperation: true)
     }
     
     // MARK: - Private
-    private func updateBanknotesInATM(_ list: [Banknote]) {
+    private func updateBanknotesInATM(list: [Banknote]) {
         guard list.isEmpty == false else {
             return
         }
@@ -132,9 +137,9 @@ class ATMDataModel {
         }
         
         if banknoteInATM.quantity >= banknoteQuantity {
-            return Banknote(banknoteInATM.banknoteVariant, banknoteQuantity)
+            return Banknote(banknoteInATM.banknoteVariant, quantity: banknoteQuantity)
         } else {
-            return Banknote(banknoteInATM.banknoteVariant, banknoteInATM.quantity)
+            return Banknote(banknoteInATM.banknoteVariant, quantity: banknoteInATM.quantity)
         }
     }
     
@@ -150,7 +155,14 @@ class ATMDataModel {
         return smallBanknotes
     }
     
-    private func printBanknoteList(_ banknoteList: [Banknote], isWithdrawOperation: Bool) {
+    private func sortedBiggerBanknotesAscending() -> [Banknote] {
+        var bigBanknotes = banknoteList.filter{ $0.isSmallBanknote() == false }
+        bigBanknotes.sort{ $0.banknoteValue() < $1.banknoteValue() }
+        
+        return bigBanknotes
+    }
+    
+    private func printBanknoteList(banknoteList: [Banknote], isWithdrawOperation: Bool) {
         guard banknoteList.isEmpty == false else {
             return
         }
@@ -171,5 +183,15 @@ class ATMDataModel {
         if banknote.quantity == 0 {
             banknoteList.remove(banknote)
         }
+    }
+    
+    private func sumSmallBanknotes(_ sortedBanknoteList: [Banknote]) -> Int{
+        var sumInATM = 0
+        
+        for banknoteInATM in sortedBanknoteList {
+            sumInATM = banknoteInATM.banknoteValue() * banknoteInATM.quantity
+        }
+        
+        return sumInATM
     }
 }

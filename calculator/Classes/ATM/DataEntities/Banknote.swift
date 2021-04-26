@@ -25,7 +25,7 @@ class Banknote: Equatable {
     var quantity: Int
     
     // MARK: - Methods
-    init(_ banknoteVariant: Variant, _ quantity: Int) {
+    init(_ banknoteVariant: Variant, quantity: Int) {
         self.banknoteVariant = banknoteVariant
         self.quantity = quantity
     }
