@@ -7,17 +7,20 @@
 
 import Foundation
 
-class Calculator {
+class CalculatorDataModel {
     
-    // MARK: - Declarations
+    // MARK: - Constants
     private var currentNumber = 0.0
     private var previousNumber = 0.0
+    
+    // MARK: - Declarations
     private var canEnterSecondNumber = false
     private var selectedAction: ActionType? = nil
     private var didCalculation = false
     var displayText = ""
     
     // MARK: - Methods
+    // MARK: - Public
     func enterDigit(_ digit: Int) {
         guard digit >= 0, digit < 10 else {
             print ("ERROR! digit is out of boundaries: \(digit)")
@@ -33,16 +36,6 @@ class Calculator {
         } else {
             appendDigit(digit)
         }
-    }
-    
-    private func updateDisplayText(_ digit: Int) {
-        displayText = String(digit)
-        currentNumber = Double(displayText) ?? 0.0
-    }
-    
-    private func appendDigit(_ digit: Int) {
-        displayText = displayText + String(digit)
-        currentNumber = Double(displayText) ?? 0.0
     }
     
     func didSelectAction(_ action: ActionType) {
@@ -64,6 +57,17 @@ class Calculator {
             selectMathematicalAction(action)
             didCalculation = false
         }
+    }
+    
+    // MARK: - Private
+    private func updateDisplayText(_ digit: Int) {
+        displayText = String(digit)
+        currentNumber = Double(displayText) ?? 0.0
+    }
+    
+    private func appendDigit(_ digit: Int) {
+        displayText = displayText + String(digit)
+        currentNumber = Double(displayText) ?? 0.0
     }
     
     private func calculate() {

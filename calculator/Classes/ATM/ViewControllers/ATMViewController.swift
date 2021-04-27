@@ -20,7 +20,7 @@ class ATMViewController: UIViewController {
         atmDataModel.refillCash(refillBanknoteList: [Banknote(.oneHundred, quantity: kDefaultQuantity),
                                                      Banknote(.fifty, quantity: kDefaultQuantity),
                                                      Banknote(.ten, quantity: kDefaultQuantity),
-//                                                     Banknote(.five, quantity: kDefaultQuantity)
+                                                     Banknote(.five, quantity: kDefaultQuantity)
         ]
         )
     }

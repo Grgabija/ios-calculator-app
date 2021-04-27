@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Calculator {
+extension CalculatorDataModel {
     
     enum ActionType: Int {
         case reset = 11, divide, multiply, subtract, add, calculate, remainder

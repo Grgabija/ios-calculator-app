@@ -11,19 +11,23 @@ import UIKit
 class CalculatorViewController: UIViewController {
     
     // MARK: - Declarations
-    private let calculator = Calculator()
+    private let calculator = CalculatorDataModel()
     
     @IBOutlet private weak var displayLabel: UILabel!
     
     // MARK: - Methods
     @IBAction func onNumberTap(_ sender: UIButton) {
-        let digit: Int = (sender.tag - 1)
-        calculator.enterDigit(digit)
+        guard let digit = Number.Digit(rawValue: (sender.tag-1)) else {
+            print("ERROR! unexpected buttonTag: \(sender.tag)")
+            return
+        }
+       
+        calculator.enterDigit(digit.rawValue)
         displayLabel.text = calculator.displayText
     }
     
     @IBAction func onActionButtonTap(_ sender: UIButton) {
-        guard let action = Calculator.ActionType(rawValue: sender.tag) else {
+        guard let action = CalculatorDataModel.ActionType(rawValue: sender.tag) else {
             print("ERROR! unexpected buttonTag: \(sender.tag)")
             return
         }
