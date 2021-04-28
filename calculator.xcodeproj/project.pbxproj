@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84C541542603526E00AEBB49 /* Calculator+ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C541532603526E00AEBB49 /* Calculator+ActionType.swift */; };
-		96521221263802BA008C9BE7 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96521220263802BA008C9BE7 /* Number.swift */; };
+		84C541542603526E00AEBB49 /* Calculator+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C541532603526E00AEBB49 /* Calculator+Enums.swift */; };
 		9678F5E626087CAE008A1FEC /* ATM+DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678F5E526087CAE008A1FEC /* ATM+DataModel.swift */; };
 		967AE65E262D84FB003AFE5D /* ATMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967AE65D262D84FB003AFE5D /* ATMViewController.swift */; };
 		968529DA25FF882F001994D7 /* Calculator+DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968529D925FF882F001994D7 /* Calculator+DataModel.swift */; };
@@ -23,8 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		84C541532603526E00AEBB49 /* Calculator+ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calculator+ActionType.swift"; sourceTree = "<group>"; };
-		96521220263802BA008C9BE7 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
+		84C541532603526E00AEBB49 /* Calculator+Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calculator+Enums.swift"; sourceTree = "<group>"; };
 		9678F5E526087CAE008A1FEC /* ATM+DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ATM+DataModel.swift"; sourceTree = "<group>"; };
 		967AE65D262D84FB003AFE5D /* ATMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMViewController.swift; sourceTree = "<group>"; };
 		968529D925FF882F001994D7 /* Calculator+DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calculator+DataModel.swift"; sourceTree = "<group>"; };
@@ -80,14 +78,6 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
-		9652121F26380295008C9BE7 /* DataEntities */ = {
-			isa = PBXGroup;
-			children = (
-				96521220263802BA008C9BE7 /* Number.swift */,
-			);
-			path = DataEntities;
-			sourceTree = "<group>";
-		};
 		9678F5E426087C94008A1FEC /* ATM */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,20 +92,10 @@
 		967EA77A2636D0DA00F23C9E /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				9652121F26380295008C9BE7 /* DataEntities */,
 				967EA77D2636D13500F23C9E /* DataModels */,
 				967EA77C2636D12500F23C9E /* ViewControllers */,
-				967EA77B2636D11200F23C9E /* Tools */,
 			);
 			path = Calculator;
-			sourceTree = "<group>";
-		};
-		967EA77B2636D11200F23C9E /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				84C541532603526E00AEBB49 /* Calculator+ActionType.swift */,
-			);
-			path = Tools;
 			sourceTree = "<group>";
 		};
 		967EA77C2636D12500F23C9E /* ViewControllers */ = {
@@ -130,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				968529D925FF882F001994D7 /* Calculator+DataModel.swift */,
+				84C541532603526E00AEBB49 /* Calculator+Enums.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -262,9 +243,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96521221263802BA008C9BE7 /* Number.swift in Sources */,
 				96B1DF3225FF3A5400F9FF61 /* CalculatorViewController.swift in Sources */,
-				84C541542603526E00AEBB49 /* Calculator+ActionType.swift in Sources */,
+				84C541542603526E00AEBB49 /* Calculator+Enums.swift in Sources */,
 				96B1DF2E25FF3A5400F9FF61 /* AppDelegate.swift in Sources */,
 				96C0498A2611E84D00962080 /* Banknote.swift in Sources */,
 				96B1DF3025FF3A5400F9FF61 /* SceneDelegate.swift in Sources */,

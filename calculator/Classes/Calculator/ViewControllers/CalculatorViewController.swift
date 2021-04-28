@@ -17,22 +17,25 @@ class CalculatorViewController: UIViewController {
     
     // MARK: - Methods
     @IBAction func onNumberTap(_ sender: UIButton) {
-        guard let digit = Number.Digit(rawValue: (sender.tag-1)) else {
-            print("ERROR! unexpected buttonTag: \(sender.tag)")
-            return
-        }
-       
-        calculator.enterDigit(digit.rawValue)
-        displayLabel.text = calculator.displayText
-    }
-    
-    @IBAction func onActionButtonTap(_ sender: UIButton) {
-        guard let action = CalculatorDataModel.ActionType(rawValue: sender.tag) else {
-            print("ERROR! unexpected buttonTag: \(sender.tag)")
+        
+        guard let currentTitle = sender.currentTitle,
+              let digit = CalculatorDataModel.Digit(rawValue: (Int(currentTitle) ?? 0)) else {
+            print("ERROR! unexpected buttonTitle: \(sender.currentTitle ?? "nil")")
             return
         }
         
-        calculator.didSelectAction(action)
-        displayLabel.text = calculator.displayText
+        calculator.enterDigit(digit: digit.rawValue)
+        displayLabel.text = calculator.result
+    }
+    
+    @IBAction func onActionButtonTap(_ sender: UIButton) {
+        guard let currentTitle = sender.currentTitle,
+              let action = CalculatorDataModel.ActionType(rawValue: currentTitle) else {
+            print("ERROR! unexpected buttonTitle: \(sender.currentTitle ?? "nil")")
+            return
+        }
+        
+        calculator.selectAction(action: action)
+        displayLabel.text = calculator.result
     }
 }
