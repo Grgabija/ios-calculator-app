@@ -11,31 +11,31 @@ import UIKit
 class CalculatorViewController: UIViewController {
     
     // MARK: - Declarations
-    private let calculator = CalculatorDataModel()
+    private let calculatorDataModel = CalculatorDataModel()
     
     @IBOutlet private weak var displayLabel: UILabel!
     
     // MARK: - Methods
     @IBAction func onNumberTap(_ sender: UIButton) {
-        
         guard let currentTitle = sender.currentTitle,
-              let digit = CalculatorDataModel.Digit(rawValue: (Int(currentTitle) ?? 0)) else {
-            print("ERROR! unexpected buttonTitle: \(sender.currentTitle ?? "nil")")
+              let currentTitleParsedAsInt = Int(currentTitle),
+              let digit = CalculatorDataModel.Digit(rawValue: currentTitleParsedAsInt) else {
+            print("ERROR! unexpected buttonTitle: \(String(describing: sender.currentTitle))")
             return
         }
         
-        calculator.enterDigit(digit: digit.rawValue)
-        displayLabel.text = calculator.result
+        calculatorDataModel.enterDigit(digit: digit)
+        displayLabel.text = calculatorDataModel.result
     }
     
     @IBAction func onActionButtonTap(_ sender: UIButton) {
         guard let currentTitle = sender.currentTitle,
               let action = CalculatorDataModel.ActionType(rawValue: currentTitle) else {
-            print("ERROR! unexpected buttonTitle: \(sender.currentTitle ?? "nil")")
+            print("ERROR! unexpected buttonTitle: \(String(describing: sender.currentTitle))")
             return
         }
         
-        calculator.selectAction(action: action)
-        displayLabel.text = calculator.result
+        calculatorDataModel.selectAction(actionType: action)
+        displayLabel.text = calculatorDataModel.result
     }
 }

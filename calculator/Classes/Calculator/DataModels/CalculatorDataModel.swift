@@ -1,5 +1,5 @@
 //
-//  Calculator+DataModel.swift
+//  CalculatorDataModel.swift
 //  calculator
 //
 //  Created by Gabija on 2021-03-15.
@@ -19,20 +19,22 @@ class CalculatorDataModel {
     
     // MARK: - Methods
     // MARK: - Public
-    func enterDigit(digit: Int) {
-        guard digit >= 0, digit < 10 else {
+    func enterDigit(digit: Digit) {
+        let digitValue = digit.rawValue
+        
+        guard digitValue >= 0, digitValue < 10 else {
             print ("ERROR! digit is out of boundaries: \(digit)")
             return
         }
         
         if result == "ERR0R" || didCalculation == true {
-            updateResult(digit: digit)
+            updateResult(digit: digitValue)
             didCalculation = false
         } else if canEnterSecondNumber == true {
-            updateResult(digit: digit)
+            updateResult(digit: digitValue)
             canEnterSecondNumber = false
         } else {
-            appendDigit(digit: digit)
+            appendDigit(digit: digitValue)
         }
     }
     
@@ -44,8 +46,10 @@ class CalculatorDataModel {
         
         switch action {
         case .calculate:
-            calculate()
-            didCalculation = true
+            if let calculationResult = calculate() {
+                result = calculationResult
+                didCalculation = true
+            }
             
         case .reset:
             reset()
@@ -58,40 +62,42 @@ class CalculatorDataModel {
     }
     
     // MARK: - Private
-    private func calculate() {
+    private func calculate() -> String? {
         guard let action = selectedAction,
               action.isArithmeticFunction() else {
-            return
+            return nil
         }
+        var calculationResult = ""
         
         switch action {
         case .divide:
             guard currentNumber != 0 else {
-                return result = "ERR0R"
+                return "ERR0R"
             }
             
-            result = String(previousNumber / currentNumber)
+            calculationResult = String(previousNumber / currentNumber)
             
         case .multiply:
-            result = String(previousNumber * currentNumber)
+            calculationResult = String(previousNumber * currentNumber)
             
         case .subtract:
-            result = String(previousNumber - currentNumber)
+            calculationResult = String(previousNumber - currentNumber)
             
         case .add:
-            result = String(previousNumber + currentNumber)
+            calculationResult = String(previousNumber + currentNumber)
             
         case .remainder:
             guard currentNumber != 0 else {
-                return result = "ERR0R"
+                return "ERR0R"
             }
             
-            result = String(previousNumber.truncatingRemainder(dividingBy: currentNumber))
+            calculationResult = String(previousNumber.truncatingRemainder(dividingBy: currentNumber))
             
         case .reset, .calculate:
             print("ERROR! received non-arithmetic function: \(action)")
-            return
+            return nil
         }
+        return calculationResult
     }
     
     private func reset() {
@@ -113,11 +119,7 @@ class CalculatorDataModel {
     }
     
     private func selectMathematicalAction(action: ActionType) {
-        guard let input = Double(result) else {
-            return
-        }
-        
-        previousNumber = input
+        previousNumber = Double(result) ?? 0.0
         selectedAction = action
         canEnterSecondNumber = true
     }

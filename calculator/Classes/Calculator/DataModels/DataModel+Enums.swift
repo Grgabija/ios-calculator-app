@@ -1,5 +1,5 @@
 //
-//  Calculator+Enums.swift
+//  DataModel+Enums.swift
 //  calculator
 //
 //  Created by Admin on 2021-03-18.

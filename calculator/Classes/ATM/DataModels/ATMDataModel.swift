@@ -1,5 +1,5 @@
 //
-//  ATM+DataModel.swift
+//  ATMDataModel.swift
 //  calculator
 //
 //  Created by Gabija on 2021-03-22.
