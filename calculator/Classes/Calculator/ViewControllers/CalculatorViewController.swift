@@ -35,7 +35,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        calculatorDataModel.selectAction(actionType: action)
+        calculatorDataModel.selectAction(action: action)
         displayLabel.text = calculatorDataModel.result
     }
 }
