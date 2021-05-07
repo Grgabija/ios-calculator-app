@@ -19,8 +19,8 @@ class CalculatorDataModel {
     
     // MARK: - Methods
     // MARK: - Public
-    func enterDigit(digit: Digit) {
-        let digitValue = digit.rawValue
+    func enterDigit(_ digit: Digit) {
+        let digitValue = digit.value
         
         guard digitValue >= 0, digitValue < 10 else {
             print ("ERROR! digit is out of boundaries: \(digit)")
@@ -28,17 +28,17 @@ class CalculatorDataModel {
         }
         
         if result == "ERR0R" || didCalculation == true {
-            updateResult(digit: digitValue)
+            updateResult(digit)
             didCalculation = false
         } else if canEnterSecondNumber == true {
-            updateResult(digit: digitValue)
+            updateResult(digit)
             canEnterSecondNumber = false
         } else {
-            appendDigit(digit: digitValue)
+            appendDigit(digit)
         }
     }
     
-    func selectAction(action: ActionType) {
+    func selectAction(_ action: ActionType) {
         guard result.isEmpty == false else {
             print ("Warning! Display text is empty")
             return
@@ -108,13 +108,13 @@ class CalculatorDataModel {
     }
     
     // MARK: - Helpers
-    private func updateResult(digit: Int) {
-        result = String(digit)
+    private func updateResult(_ digit: Digit) {
+        result = String(digit.value)
         currentNumber = Double(result) ?? 0.0
     }
     
-    private func appendDigit(digit: Int) {
-        result = result + String(digit)
+    private func appendDigit(_ digit: Digit) {
+        result = result + String(digit.value)
         currentNumber = Double(result) ?? 0.0
     }
     

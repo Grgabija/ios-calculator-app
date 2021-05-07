@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84C541542603526E00AEBB49 /* DataModel+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C541532603526E00AEBB49 /* DataModel+Enums.swift */; };
+		84C541542603526E00AEBB49 /* CalculatorDataModel+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C541532603526E00AEBB49 /* CalculatorDataModel+Enums.swift */; };
 		9678F5E626087CAE008A1FEC /* ATMDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9678F5E526087CAE008A1FEC /* ATMDataModel.swift */; };
 		967AE65E262D84FB003AFE5D /* ATMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967AE65D262D84FB003AFE5D /* ATMViewController.swift */; };
 		968529DA25FF882F001994D7 /* CalculatorDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968529D925FF882F001994D7 /* CalculatorDataModel.swift */; };
@@ -22,7 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		84C541532603526E00AEBB49 /* DataModel+Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataModel+Enums.swift"; sourceTree = "<group>"; };
+		84C541532603526E00AEBB49 /* CalculatorDataModel+Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalculatorDataModel+Enums.swift"; sourceTree = "<group>"; };
 		9678F5E526087CAE008A1FEC /* ATMDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMDataModel.swift; sourceTree = "<group>"; };
 		967AE65D262D84FB003AFE5D /* ATMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMViewController.swift; sourceTree = "<group>"; };
 		968529D925FF882F001994D7 /* CalculatorDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorDataModel.swift; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				968529D925FF882F001994D7 /* CalculatorDataModel.swift */,
-				84C541532603526E00AEBB49 /* DataModel+Enums.swift */,
+				84C541532603526E00AEBB49 /* CalculatorDataModel+Enums.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -244,7 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96B1DF3225FF3A5400F9FF61 /* CalculatorViewController.swift in Sources */,
-				84C541542603526E00AEBB49 /* DataModel+Enums.swift in Sources */,
+				84C541542603526E00AEBB49 /* CalculatorDataModel+Enums.swift in Sources */,
 				96B1DF2E25FF3A5400F9FF61 /* AppDelegate.swift in Sources */,
 				96C0498A2611E84D00962080 /* Banknote.swift in Sources */,
 				96B1DF3025FF3A5400F9FF61 /* SceneDelegate.swift in Sources */,

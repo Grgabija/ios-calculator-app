@@ -18,13 +18,13 @@ class CalculatorViewController: UIViewController {
     // MARK: - Methods
     @IBAction func onNumberTap(_ sender: UIButton) {
         guard let currentTitle = sender.currentTitle,
-              let currentTitleParsedAsInt = Int(currentTitle),
-              let digit = CalculatorDataModel.Digit(rawValue: currentTitleParsedAsInt) else {
+              let currentTitleAsInt = Int(currentTitle),
+              let digit = CalculatorDataModel.Digit(rawValue: currentTitleAsInt) else {
             print("ERROR! unexpected buttonTitle: \(String(describing: sender.currentTitle))")
             return
         }
         
-        calculatorDataModel.enterDigit(digit: digit)
+        calculatorDataModel.enterDigit(digit)
         displayLabel.text = calculatorDataModel.result
     }
     
@@ -35,7 +35,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        calculatorDataModel.selectAction(action: action)
+        calculatorDataModel.selectAction(action)
         displayLabel.text = calculatorDataModel.result
     }
 }
