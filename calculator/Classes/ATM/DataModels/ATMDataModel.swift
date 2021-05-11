@@ -1,5 +1,5 @@
 //
-//  ATM+DataModel.swift
+//  ATMDataModel.swift
 //  calculator
 //
 //  Created by Gabija on 2021-03-22.
@@ -95,7 +95,6 @@ class ATMDataModel {
             updatedATMBanknoteList.append(newBanknote)
             withdrawnBanknoteList.append(banknote)
         }
-        updatedATMBanknoteList.forEach{ print("\($0.banknoteVariant): \($0.quantity)") }
 
         guard updatedATMBanknoteList.isEmpty == false, remainingSum == 0 else {
             return
